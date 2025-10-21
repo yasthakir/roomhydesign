@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Scholar's Loft - Roomhy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .glow-button {
+            background: linear-gradient(90deg, #5865F2, #8B5CF6);
+            box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.39);
+            transition: all 0.3s ease;
+        }
+        .glow-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px 0 rgba(139, 92, 246, 0.45);
+        }
+        .horizontal-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .horizontal-slider {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/80 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center py-4">
+                 <a href="index.html" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">Roomhy</a>
+                 <div class="hidden lg:flex items-center space-x-4">
+                    <a href="index.html#home" class="text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="index.html#why-roomhy" class="text-gray-600 hover:text-gray-900 font-medium">About</a>
+                    <a href="#" class="text-gray-600 border border-gray-300 px-5 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">Post Property</a>
+                    <a href="#" class="glow-button text-white px-5 py-2 rounded-lg font-semibold">Get Started</a>
+                </div>
+                <button id="mobile-menu-button" class="p-2 text-gray-700 lg:hidden"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden px-4 sm:px-6 pb-4">
+            <div class="bg-white/95 backdrop-blur-lg border border-gray-200/80 rounded-xl p-4 space-y-2 shadow-lg">
+                <a href="index.html#home" class="block py-2 text-center hover:text-purple-600 font-medium">Home</a>
+                <a href="index.html#why-roomhy" class="block py-2 text-center hover:text-purple-600 font-medium">About</a>
+                <a href="#" class="block mt-2 py-2 text-center text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100">Post Property</a>
+                <a href="#" class="block mt-2 glow-button text-white text-center px-5 py-2 rounded-lg font-semibold">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <!-- Image Gallery -->
+        <section id="gallery" class="relative">
+            <a href="index.html" class="absolute top-4 left-4 z-10 bg-white/80 p-2 rounded-full shadow-md backdrop-blur-sm hover:bg-white lg:top-6 lg:left-6">
+                <i data-lucide="arrow-left" class="w-5 h-5 text-gray-800"></i>
+            </a>
+            
+            <!-- Mobile Slider -->
+            <div class="lg:hidden">
+                <div class="flex overflow-x-auto snap-x snap-mandatory horizontal-slider rounded-xl">
+                    <div class="w-full flex-shrink-0 snap-center h-80">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1916&auto=format&fit=crop" alt="Main property view" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full flex-shrink-0 snap-center h-80">
+                        <img src="https://images.unsplash.com/photo-1560185893-a55de8534129?q=80&w=1918&auto=format&fit=crop" alt="Property view 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full flex-shrink-0 snap-center h-80">
+                        <img src="https://images.unsplash.com/photo-1556702571-3e11dd2b1a5a?q=80&w=1974&auto=format&fit=crop" alt="Property view 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full flex-shrink-0 snap-center h-80">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1932&auto=format&fit=crop" alt="Property view 4" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full flex-shrink-0 snap-center h-80">
+                        <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16da34?q=80&w=1974&auto=format&fit=crop" alt="Property view 5" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop Grid -->
+            <div class="hidden lg:grid grid-cols-4 gap-4 max-h-[500px] rounded-2xl overflow-hidden">
+                <div class="col-span-2 row-span-2">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1916&auto=format&fit=crop" alt="Main property view" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1560185893-a55de8534129?q=80&w=1918&auto=format&fit=crop" alt="Property view 2" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1556702571-3e11dd2b1a5a?q=80&w=1974&auto=format&fit=crop" alt="Property view 3" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1932&auto=format&fit=crop" alt="Property view 4" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16da34?q=80&w=1974&auto=format&fit=crop" alt="Property view 5" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="lg:grid lg:grid-cols-3 lg:gap-12 mt-8 md:mt-12">
+            <div class="lg:col-span-2 space-y-12">
+                <!-- Property Info -->
+                <section>
+                    <div class="flex items-center justify-between">
+                         <h1 class="text-3xl md:text-4xl font-bold text-gray-900">The Scholar's Loft</h1>
+                         <div class="flex items-center space-x-2">
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                            <span class="font-bold">4.8</span>
+                            <span class="text-gray-500">(12 Reviews)</span>
+                         </div>
+                    </div>
+                    <p class="text-gray-500 flex items-center mt-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Koramangala, Bangalore
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs text-purple-800 bg-purple-100 px-3 py-1 rounded-full font-medium">Co-Living</span>
+                        <span class="text-xs text-blue-800 bg-blue-100 px-3 py-1 rounded-full font-medium">Boys & Girls</span>
+                        <span class="text-xs text-green-800 bg-green-100 px-3 py-1 rounded-full font-medium">Verified</span>
+                    </div>
+                </section>
+                
+                <!-- About Section -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4">About This Property</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Welcome to The Scholar's Loft, a premium co-living space designed exclusively for students and young professionals. Located in the heart of Koramangala, our property offers a perfect blend of comfort, community, and convenience. Each room is fully furnished with modern amenities, ensuring you have everything you need to feel at home from day one. Enjoy high-speed Wi-Fi, professional housekeeping, and a vibrant community of like-minded individuals.
+                    </p>
+                </section>
+
+                <!-- Amenities -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-6">Amenities</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                        <div class="flex items-center space-x-3"><i data-lucide="wifi" class="w-6 h-6 text-purple-600"></i><span class="font-medium">High-Speed Wi-Fi</span></div>
+                        <div class="flex items-center space-x-3"><i data-lucide="wind" class="w-6 h-6 text-purple-600"></i><span class="font-medium">Air Conditioning</span></div>
+                        <div class="flex items-center space-x-3"><i data-lucide="utensils-crossed" class="w-6 h-6 text-purple-600"></i><span class="font-medium">Delicious Meals</span></div>
+                        <div class="flex items-center space-x-3"><i data-lucide="washing-machine" class="w-6 h-6 text-purple-600"></i><span class="font-medium">Laundry Service</span></div>
+                        <div class="flex items-center space-x-3"><i data-lucide="shield-check" class="w-6 h-6 text-purple-600"></i><span class="font-medium">24/7 Security</span></div>
+                        <div class="flex items-center space-x-3"><i data-lucide="sparkles" class="w-6 h-6 text-purple-600"></i><span class="font-medium">Housekeeping</span></div>
+                    </div>
+                </section>
+
+                <!-- House Rules -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4">House Rules</h2>
+                    <ul class="space-y-3 text-gray-600 list-disc list-inside">
+                        <li>No smoking inside the premises.</li>
+                        <li>Guests are allowed only in common areas until 10 PM.</li>
+                        <li>Maintain cleanliness in common areas.</li>
+                        <li>Respect the privacy and peace of other residents.</li>
+                    </ul>
+                </section>
+
+                <!-- Reviews -->
+                 <section>
+                    <h2 class="text-2xl font-bold mb-6">What Students Say</h2>
+                    <div class="space-y-6">
+                        <div class="light-card p-6 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Priya Sharma" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-bold">Priya Sharma</p>
+                                    <div class="flex items-center text-yellow-500">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"Amazing place to live! The rooms are clean, the food is great, and the community is super friendly. Highly recommended."</p>
+                        </div>
+                         <div class="light-card p-6 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <img src="https://i.pravatar.cc/150?u=a042581f4e29026704a" alt="Rohan Mehra" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-bold">Rohan Mehra</p>
+                                    <div class="flex items-center text-yellow-500">
+                                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">"Great location, very close to my college. The Wi-Fi is fast which is a big plus for my studies. Overall a good experience."</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Booking Card -->
+            <div class="lg:col-span-1 mt-12 lg:mt-0">
+                <div class="light-card p-6 rounded-2xl sticky top-28">
+                    <h3 class="text-lg font-semibold mb-2">Pricing</h3>
+                    <p class="text-3xl font-bold">₹16,500 <span class="text-base font-normal text-gray-500">/ month</span></p>
+                    <p class="text-sm text-gray-500 mt-1">For single sharing room</p>
+                    
+                    <div class="mt-6 space-y-2">
+                        <p class="font-medium">Select Sharing Type:</p>
+                        <div class="flex gap-2">
+                            <button class="flex-1 bg-purple-100 text-purple-800 font-semibold py-2 px-4 rounded-lg border-2 border-purple-600">Single</button>
+                            <button class="flex-1 bg-white hover:bg-gray-100 font-semibold py-2 px-4 rounded-lg border border-gray-300">Double</button>
+                            <button class="flex-1 bg-white hover:bg-gray-100 font-semibold py-2 px-4 rounded-lg border border-gray-300">Triple</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 space-y-4">
+                        <button class="w-full glow-button text-white font-bold py-3 px-4 rounded-lg">Book Now</button>
+                        <button class="w-full bg-white border border-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg hover:bg-gray-100">Schedule a Visit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location & Nearby -->
+        <section id="location" class="mt-16 md:mt-24">
+            <h2 class="text-2xl font-bold mb-6">Location & Nearby Places</h2>
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                     <div class="w-full h-80 bg-gray-200 rounded-2xl overflow-hidden">
+                        <!-- Replace with a real map embed if needed -->
+                        <img src="https://placehold.co/800x600/E9D5FF/8B5CF6?text=Map+Goes+Here" class="w-full h-full object-cover" alt="Map Location">
+                     </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">What's Nearby?</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center"><i data-lucide="graduation-cap" class="w-5 h-5 mr-3 text-purple-600"></i><span><span class="font-bold">Christ University</span> - 2 km away</span></div>
+                        <div class="flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-3 text-purple-600"></i><span><span class="font-bold">Koramangala Bus Stop</span> - 500 m away</span></div>
+                        <div class="flex items-center"><i data-lucide="shopping-cart" class="w-5 h-5 mr-3 text-purple-600"></i><span><span class="font-bold">Forum Mall</span> - 1.5 km away</span></div>
+                         <div class="flex items-center"><i data-lucide="hospital" class="w-5 h-5 mr-3 text-purple-600"></i><span><span class="font-bold">St. John's Hospital</span> - 1 km away</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-24">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><a href="#" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 mb-4 inline-block">Roomhy</a><p class="text-gray-500">Your trusted partner in finding the perfect student accommodation.</p></div>
+                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Explore</h4><ul class="space-y-2"><li><a href="#" class="text-gray-500 hover:text-gray-800">Apartments</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Hostels</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Co-Living</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Company</h4><ul class="space-y-2"><li><a href="#why-roomhy" class="text-gray-500 hover:text-gray-800">About Us</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Privacy Policy</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Connect</h4><div class="flex space-x-4"><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="facebook" class="w-6 h-6"></i></a><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="instagram" class="w-6 h-6"></i></a><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="twitter" class="w-6 h-6"></i></a></div></div>
+            </div>
+            <div class="mt-12 border-t border-gray-200 pt-6 text-center text-gray-500"><p>&copy; 2025 Roomhy. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+    </script>
+</body>
+</html>
+

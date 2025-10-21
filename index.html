@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomhy - Find Your Student Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB; /* Light gray background */
+            color: #1F2937; /* Dark gray text */
+        }
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .light-card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            transform: translateY(-4px);
+        }
+        .hero-section {
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .glow-button {
+            background: linear-gradient(90deg, #5865F2, #8B5CF6);
+            box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.39);
+            transition: all 0.3s ease;
+        }
+        .glow-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px 0 rgba(139, 92, 246, 0.45);
+        }
+        
+        .horizontal-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .horizontal-slider {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Enhanced Offering Card Effects */
+        .offering-card-item {
+            opacity: 0; /* Initially hidden for animation */
+        }
+        .offering-card .overlay {
+            transition: background 0.4s ease;
+        }
+        .group:hover .offering-card .overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+        }
+        .offering-card h3 {
+            transition: transform 0.4s ease;
+            transform: translateY(10px);
+        }
+        .group:hover .offering-card h3 {
+            transform: translateY(0);
+        }
+
+        @keyframes slide-in {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-in {
+            animation: slide-in 0.7s ease-out forwards;
+        }
+
+        @keyframes card-slide-up {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-animate {
+            animation: card-slide-up 0.6s ease-out forwards;
+        }
+        .cta-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1582693630824-53c825364347?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 py-4">
+            <div id="header-inner" class="bg-white/80 backdrop-blur-lg border border-gray-200/80 rounded-xl px-4 py-2 flex justify-between items-center transition-all duration-300 shadow-sm">
+                <!-- Mobile/Tablet Header -->
+                <div class="flex justify-between items-center w-full lg:hidden">
+                    <button id="mobile-menu-button" class="p-2 text-gray-700"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                    <a href="#home" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">Roomhy</a>
+                    <div class="w-10"></div>
+                </div>
+                
+                <!-- Desktop Header -->
+                <div class="hidden lg:flex w-full justify-between items-center">
+                    <a href="#home" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">Roomhy</a>
+                    <nav class="flex items-center space-x-8">
+                        <a href="#home" class="text-gray-600 hover:text-gray-900 transition duration-300 font-medium">Home</a>
+                        <a href="#why-roomhy" class="text-gray-600 hover:text-gray-900 transition duration-300 font-medium">About</a>
+                        <a href="#featured" class="text-gray-600 hover:text-gray-900 transition duration-300 font-medium">Category</a>
+                        <a href="#contact" class="text-gray-600 hover:text-gray-900 transition duration-300 font-medium">Contact</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="text-gray-600 border border-gray-300 px-5 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">Post Property</a>
+                        <a href="#" class="glow-button text-white px-5 py-2 rounded-lg font-semibold">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden px-4 sm:px-6 pb-4 mt-2">
+            <div class="bg-white/95 backdrop-blur-lg border border-gray-200/80 rounded-xl p-4 space-y-2 shadow-lg">
+                <a href="#home" class="block py-2 text-center hover:text-purple-600 font-medium">Home</a>
+                <a href="#why-roomhy" class="block py-2 text-center hover:text-purple-600 font-medium">About</a>
+                <a href="#featured" class="block py-2 text-center hover:text-purple-600 font-medium">Category</a>
+                <a href="#contact" class="block py-2 text-center hover:text-purple-600 font-medium">Contact</a>
+                <a href="#" class="block mt-2 py-2 text-center text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100">Post Property</a>
+                <a href="#" class="block mt-2 glow-button text-white text-center px-5 py-2 rounded-lg font-semibold">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-h-screen flex items-center justify-center text-white pt-24">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight animate-slide-in" style="animation-delay: 0.2s;">Your Next Chapter Starts Here.</h1>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-gray-200 animate-slide-in" style="animation-delay: 0.4s;">Find student housing that feels like home. Verified, affordable, and close to campus.</p>
+            <div class="bg-white/20 backdrop-blur-md border border-white/30 rounded-lg p-4 md:p-6 shadow-2xl max-w-3xl mx-auto animate-slide-in" style="animation-delay: 0.6s;">
+                <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="text" placeholder="Enter City or College Name..." class="w-full p-3 rounded-md bg-white/90 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none placeholder-gray-500">
+                    <select class="w-full p-3 rounded-md bg-white/90 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                        <option>All Accommodations</option><option>PG</option><option>Hostel</option><option>Apartment</option>
+                    </select>
+                    <button type="submit" class="w-full glow-button text-white p-3 rounded-md font-semibold flex items-center justify-center space-x-2"><i data-lucide="search" class="w-5 h-5"></i><span>Find My Home</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 sm:px-6 py-16 md:py-24 space-y-24">
+
+        <!-- Our Offerings -->
+        <section id="offerings">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900">Our Offerings</h2>
+            <div class="relative">
+                <button id="offer-prev" class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                <div id="offerings-slider" class="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scroll-smooth horizontal-slider">
+                    <a href="#" class="group block flex-shrink-0 snap-start w-72 offering-card-item">
+                        <div class="relative rounded-2xl overflow-hidden light-card h-80 offering-card transition-transform duration-300">
+                            <img src="images/angels-hostel-taipei-taiwan-9.jpeg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" alt="Hostel">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent overlay"></div>
+                            <h3 class="absolute bottom-6 left-6 text-2xl font-bold text-white">Hostel</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="group block flex-shrink-0 snap-start w-72 offering-card-item">
+                        <div class="relative rounded-2xl overflow-hidden light-card h-80 offering-card transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1932&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" alt="PG">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent overlay"></div>
+                            <h3 class="absolute bottom-6 left-6 text-2xl font-bold text-white">PG</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="group block flex-shrink-0 snap-start w-72 offering-card-item">
+                        <div class="relative rounded-2xl overflow-hidden light-card h-80 offering-card transition-transform duration-300">
+                            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" alt="Apartments">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent overlay"></div>
+                            <h3 class="absolute bottom-6 left-6 text-2xl font-bold text-white">Apartments</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="group block flex-shrink-0 snap-start w-72 offering-card-item">
+                        <div class="relative rounded-2xl overflow-hidden light-card h-80 offering-card transition-transform duration-300">
+                            <img src="images/angels-hostel-taipei-taiwan-9.jpeg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" alt="Private Rooms">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent overlay"></div>
+                            <h3 class="absolute bottom-6 left-6 text-2xl font-bold text-white">Private Rooms</h3>
+                        </div>
+                    </a>
+                </div>
+                <button id="offer-next" class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+        </section>
+
+        <!-- Why Roomhy Section -->
+        <section id="why-roomhy" class="scroll-mt-20">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+                 <div class="text-left lg:order-2">
+                    <div class="animate-slide-in text-center lg:text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">Why Roomhy?</h2>
+                    </div>
+                     <div class="hidden lg:block animate-slide-in text-left mt-8">
+                        <p class="text-gray-600 mb-6 text-lg">Roomhy was built by students, for students. We experienced the chaos of finding a reliable place to live and knew there had to be a better way. Our mission is to replace uncertainty with trust, making your transition into college life as smooth and exciting as it should be.</p>
+                        <p class="text-gray-600">We're more than a platform; we're your first friend in a new city, dedicated to helping you find a space where you can thrive.</p>
+                    </div>
+                </div>
+                <div class="w-full max-w-3xl mx-auto grid grid-cols-2 grid-rows-2 gap-4 mt-8 lg:mt-0 animate-slide-in lg:order-1" style="animation-delay: 0.2s;">
+                    <div class="row-span-2 col-span-1">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1887&auto=format&fit=crop" class="h-full w-full object-cover rounded-2xl shadow-lg" alt="Modern student accommodation building">
+                    </div>
+                    <div class="col-span-1">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=2070&auto=format&fit=crop" class="h-full w-full object-cover rounded-2xl shadow-lg" alt="Student common room with yellow chairs">
+                    </div>
+                    <div class="col-span-1">
+                         <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2070&auto=format&fit=crop" class="h-full w-full object-cover rounded-2xl shadow-lg" alt="Bright and modern student room hallway">
+                    </div>
+                </div>
+                <div class="lg:hidden animate-slide-in text-center mt-8">
+                    <p class="text-gray-600 mb-6 text-lg">Roomhy was built by students, for students. We experienced the chaos of finding a reliable place to live and knew there had to be a better way. Our mission is to replace uncertainty with trust, making your transition into college life as smooth and exciting as it should be.</p>
+                    <p class="text-gray-600">We're more than a platform; we're your first friend in a new city, dedicated to helping you find a space where you can thrive.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Cities Section -->
+        <section id="top-cities">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Find a Student Home in Your City</h2>
+                <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-12">Comfortable, affordable, and always nearby.</p>
+            </div>
+            <div class="relative">
+                 <button id="cities-prev" class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                 <div id="cities-slider" class="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scroll-smooth horizontal-slider">
+                    <div class="light-card rounded-2xl p-6 flex-shrink-0 w-64 snap-start flex flex-col items-center justify-center text-center">
+                        <img src="https://placehold.co/80x80/E9D5FF/8B5CF6?text=Kota" alt="Kota Icon" class="rounded-lg">
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Kota</h3>
+                    </div>
+                    <div class="light-card rounded-2xl p-6 flex-shrink-0 w-64 snap-start flex flex-col items-center justify-center text-center">
+                        <img src="https://placehold.co/80x80/C7D2FE/4F46E5?text=GGM" alt="Gurugram Icon" class="rounded-lg">
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Gurugram</h3>
+                    </div>
+                    <div class="light-card rounded-2xl p-6 flex-shrink-0 w-64 snap-start flex flex-col items-center justify-center text-center">
+                        <img src="https://placehold.co/80x80/BAE6FD/0284C7?text=MBI" alt="Mumbai Icon" class="rounded-lg">
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Mumbai</h3>
+                    </div>
+                    <div class="light-card rounded-2xl p-6 flex-shrink-0 w-64 snap-start flex flex-col items-center justify-center text-center">
+                        <img src="https://placehold.co/80x80/FBCFE8/BE185D?text=BLR" alt="Bangalore Icon" class="rounded-lg">
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Bangalore</h3>
+                    </div>
+                     <div class="light-card rounded-2xl p-6 flex-shrink-0 w-64 snap-start flex flex-col items-center justify-center text-center">
+                        <img src="https://placehold.co/80x80/D1FAE5/059669?text=DEL" alt="Delhi Icon" class="rounded-lg">
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Delhi</h3>
+                    </div>
+                </div>
+                <button id="cities-next" class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+        </section>
+        
+        <!-- Top Spaces in Indore -->
+        <section id="top-spaces">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900">Top Spaces in Indore</h2>
+            <div class="relative">
+                <button id="spaces-prev" class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                <div id="spaces-slider" class="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scroll-smooth horizontal-slider">
+                    <a href="#" class="group block flex-shrink-0 snap-start w-80">
+                        <div class="light-card rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop" alt="Indore Space 1" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg">Modern Student Hub</h3>
+                                <p class="text-gray-500 text-sm mt-1">Vijay Nagar, Indore</p>
+                                <p class="font-bold mt-2">₹8,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                     <a href="#" class="group block flex-shrink-0 snap-start w-80">
+                        <div class="light-card rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop" alt="Indore Space 2" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg">The Scholar's Den</h3>
+                                <p class="text-gray-500 text-sm mt-1">Bhawarkua, Indore</p>
+                                <p class="font-bold mt-2">₹9,500 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                     <a href="#" class="group block flex-shrink-0 snap-start w-80">
+                        <div class="light-card rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop" alt="Indore Space 3" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg">Campus Comforts PG</h3>
+                                <p class="text-gray-500 text-sm mt-1">Annapurna, Indore</p>
+                                <p class="font-bold mt-2">₹7,500 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                     <a href="#" class="group block flex-shrink-0 snap-start w-80">
+                        <div class="light-card rounded-xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" alt="Indore Space 4" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg">Prime Student Living</h3>
+                                <p class="text-gray-500 text-sm mt-1">Saket Nagar, Indore</p>
+                                <p class="font-bold mt-2">₹11,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <button id="spaces-next" class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="relative overflow-hidden py-12">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">How It Works</h2>
+                    <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-16 lg:mb-32">Find your perfect student home in three simple steps.</p>
+                </div>
+    
+                <!-- SVG Connector for Desktop -->
+                <div class="hidden lg:block absolute top-0 left-0 w-full h-full -z-10">
+                    <svg width="100%" height="100%" viewBox="0 0 1200 800" preserveAspectRatio="none">
+                        <path d="M 850 150 C 600 150, 600 400, 350 400" stroke="#E5E7EB" stroke-width="3" fill="none" stroke-dasharray="10,10"/>
+                        <path d="M 350 400 C 100 400, 100 650, 850 650" stroke="#E5E7EB" stroke-width="3" fill="none" stroke-dasharray="10,10"/>
+                    </svg>
+                </div>
+                
+                <div class="space-y-20 lg:space-y-24 relative">
+                    <!-- Step 1 -->
+                    <div class="grid lg:grid-cols-2 gap-12 items-center animate-slide-in relative">
+                        <!-- Mobile Connector -->
+                        <div class="lg:hidden absolute top-full left-1/2 w-px h-20 -translate-x-1/2">
+                            <svg width="2" height="100%" class="text-gray-300">
+                                <line x1="1" y1="0" x2="1" y2="100%" stroke="currentColor" stroke-width="2" stroke-dasharray="5,5"/>
+                            </svg>
+                        </div>
+                         <!-- Image Grid -->
+                         <div class="w-full max-w-lg mx-auto lg:mx-0">
+                            <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                               <div class="row-span-2 col-span-1">
+                                   <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" class="h-full w-full object-cover rounded-2xl shadow-lg" alt="Students searching on laptop">
+                               </div>
+                               <div class="col-span-1">
+                                   <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop" class="h-full w-full object-cover rounded-2xl shadow-lg" alt="Modern interior">
+                               </div>
+                               <div class="col-span-1">
+                                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=2070&auto=format&fit=crop" class="h-full w-full object-cover rounded-2xl shadow-lg" alt="Bright living room">
+                               </div>
+                           </div>
+                       </div>
+                         <!-- Text -->
+                        <div class="text-center lg:text-left">
+                            <span class="text-sm font-bold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">Step 1</span>
+                            <h3 class="text-3xl font-bold my-4 text-gray-900">Search & Discover</h3>
+                            <p class="text-gray-500 text-lg">Use our smart filters to find verified properties near your campus. Compare prices, amenities, and read genuine reviews from fellow students.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Step 2 -->
+                    <div class="grid lg:grid-cols-2 gap-12 items-center animate-slide-in relative">
+                         <!-- Mobile Connector -->
+                         <div class="lg:hidden absolute top-full left-1/2 w-px h-20 -translate-x-1/2">
+                            <svg width="2" height="100%" class="text-gray-300">
+                                <line x1="1" y1="0" x2="1" y2="100%" stroke="currentColor" stroke-width="2" stroke-dasharray="5,5"/>
+                            </svg>
+                        </div>
+                        <!-- Image Grid -->
+                        <div class="w-full max-w-lg mx-auto lg:mx-0 lg:order-2">
+                            <div class="grid grid-cols-2 gap-4">
+                                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop" alt="Online booking confirmation" class="rounded-2xl shadow-xl w-full h-full object-cover col-span-2">
+                                <img src="images/Depositphotos_39343437_xl-2015-scaled.jpg" alt="Student smiling" class="rounded-2xl shadow-xl w-full h-full object-cover">
+                                <img src="images/CIT-139-1024x678.jpg" alt="Close up of online payment" class="rounded-2xl shadow-xl w-full h-full object-cover">
+                            </div>
+                        </div>
+                         <!-- Text -->
+                        <div class="lg:order-1 text-center lg:text-left">
+                            <span class="text-sm font-bold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">Step 2</span>
+                            <h3 class="text-3xl font-bold my-4 text-gray-900">Book Instantly</h3>
+                            <p class="text-gray-500 text-lg">Found the one? Select your room, pay a small token amount, and book it online hassle-free. Your new home is just a few clicks away.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Step 3 -->
+                    <div class="grid lg:grid-cols-2 gap-12 items-center animate-slide-in">
+                         <!-- Image Grid -->
+                         <div class="w-full max-w-lg mx-auto lg:mx-0 lg:order-2">
+                            <img src="images/istockphoto-1208347853-612x612.jpg" alt="Student moving into a new room" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+                        </div>
+                         <!-- Text -->
+                        <div class="text-center lg:text-left lg:order-1">
+                            <span class="text-sm font-bold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">Step 3</span>
+                            <h3 class="text-3xl font-bold my-4 text-gray-900">Move In</h3>
+                            <p class="text-gray-500 text-lg">Complete the paperwork, pack your bags, and get ready for the best chapter of your life. Welcome to your new home!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guarantee Section -->
+        <section id="guarantee">
+            <div class="light-card rounded-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div><h3 class="text-3xl md:text-4xl font-bold text-purple-600">50K+</h3><p class="text-gray-500 mt-2">Happy Students</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-bold text-indigo-600">10K+</h3><p class="text-gray-500 mt-2">Verified Properties</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-bold text-sky-600">200+</h3><p class="text-gray-500 mt-2">Cities Served</p></div>
+                <div><h3 class="text-3xl md:text-4xl font-bold text-teal-600">100%</h3><p class="text-gray-500 mt-2">Brokerage Free</p></div>
+            </div>
+        </section>
+
+        <!-- Featured Stays -->
+        <section id="featured" class="scroll-mt-20">
+            <div class="text-center"><h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Featured Stays</h2><p class="text-gray-500 max-w-2xl mx-auto mb-8">Handpicked and verified stays in prime student locations.</p></div>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12"><button class="glow-button text-white px-5 py-2 rounded-full text-sm font-semibold">All</button><button class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold">PGs</button><button class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold">Hostels</button><button class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold">Apartments</button></div>
+            <div class="relative">
+                <button id="featured-prev" class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                <div id="featured-slider" class="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scroll-smooth horizontal-slider lg:grid lg:grid-cols-3 lg:gap-8 lg:p-0 lg:m-0">
+                    <a href="#" class="group block w-80 lg:w-full flex-shrink-0 snap-start">
+                        <div class="light-card rounded-xl overflow-hidden h-full">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1916&auto=format&fit=crop" alt="Modern PG" class="w-full h-56 object-cover">
+                            <div class="p-6 text-left">
+                                <span class="text-xs text-purple-800 bg-purple-100 px-2 py-1 rounded-full font-medium">Co-Living</span>
+                                <h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">The Scholar's Loft</h3>
+                                <p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Koramangala, BLR</p>
+                                <p class="text-lg font-bold text-gray-900">₹16,500 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="group block w-80 lg:w-full flex-shrink-0 snap-start">
+                        <div class="light-card rounded-xl overflow-hidden h-full">
+                            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop" alt="Girls Hostel" class="w-full h-56 object-cover">
+                            <div class="p-6 text-left">
+                                <span class="text-xs text-pink-800 bg-pink-100 px-2 py-1 rounded-full font-medium">Girls Hostel</span>
+                                <h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">Athena House</h3>
+                                <p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Hinjewadi, Pune</p>
+                                <p class="text-lg font-bold text-gray-900">₹10,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="group block w-80 lg:w-full flex-shrink-0 snap-start">
+                         <div class="light-card rounded-xl overflow-hidden h-full">
+                            <img src="https://images.unsplash.com/photo-1567016432779-1fee749a1532?q=80&w=1974&auto=format&fit=crop" alt="Private Room" class="w-full h-56 object-cover">
+                            <div class="p-6 text-left">
+                                <span class="text-xs text-green-800 bg-green-100 px-2 py-1 rounded-full font-medium">Private Studio</span>
+                                <h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">Campus Corner</h3>
+                                <p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>North Campus, Delhi</p>
+                                <p class="text-lg font-bold text-gray-900">₹13,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <button id="featured-next" class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700 hidden sm:block lg:hidden"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section id="why-choose-us">
+            <div class="text-center"><h2 class="text-3xl md:text-4xl font-bold mb-12 text-gray-900">Why Students Choose Us</h2></div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="light-card p-6 rounded-xl flex items-start space-x-4"><div class="bg-gradient-to-br from-green-500 to-emerald-600 text-white w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-green-500/30"><i data-lucide="wallet" class="w-6 h-6"></i></div><div><h3 class="text-lg font-semibold text-gray-900">Zero Brokerage</h3><p class="text-gray-500 mt-1">Save your money for what matters. We connect you directly with property owners, with no hidden fees.</p></div></div>
+                <div class="light-card p-6 rounded-xl flex items-start space-x-4"><div class="bg-gradient-to-br from-orange-500 to-amber-600 text-white w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-500/30"><i data-lucide="sofa" class="w-6 h-6"></i></div><div><h3 class="text-lg font-semibold text-gray-900">Fully Furnished</h3><p class="text-gray-500 mt-1">Move in with just your suitcase. Our properties come with all the essential furniture and amenities.</p></div></div>
+                <div class="light-card p-6 rounded-xl flex items-start space-x-4"><div class="bg-gradient-to-br from-rose-500 to-pink-600 text-white w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-rose-500/30"><i data-lucide="heart-handshake" class="w-6 h-6"></i></div><div><h3 class="text-lg font-semibold text-gray-900">24/7 Support</h3><p class="text-gray-500 mt-1">From booking to move-out, our dedicated support team is always here to help you.</p></div></div>
+            </div>
+        </section>
+        
+        <!-- Register to Post Property -->
+        <section id="register-property" class="cta-section rounded-2xl text-white p-12 text-center flex flex-col items-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Have a Property to Rent Out?</h2>
+            <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-8">Join our network of trusted property owners and reach thousands of students looking for a home. Listing is free and easy!</p>
+            <a href="#" class="glow-button text-white px-8 py-3 rounded-lg font-semibold text-lg">Register Now</a>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials">
+            <div class="text-center"><h2 class="text-3xl md:text-4xl font-bold mb-12 text-gray-900">What Our Students Say</h2></div>
+            <div class="relative">
+                <div id="testimonial-slider" class="overflow-hidden">
+                    <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+                        <div class="w-full flex-shrink-0 px-4"><div class="light-card rounded-2xl p-8 text-center"><img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Priya Sharma" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-purple-400"><p class="text-gray-600 italic">"Roomhy made finding a PG in Bangalore so easy! The place was exactly as shown online. Totally trustworthy and a lifesaver for a first-timer like me."</p><h4 class="font-bold text-gray-900 mt-4">Priya Sharma</h4><p class="text-sm text-gray-500">Engineering Student, Christ University</p></div></div>
+                        <div class="w-full flex-shrink-0 px-4"><div class="light-card rounded-2xl p-8 text-center"><img src="https://i.pravatar.cc/150?u=a042581f4e29026704a" alt="Rohan Mehra" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-purple-400"><p class="text-gray-600 italic">"I was worried about finding a good hostel in Delhi. The verified listings and clear pricing on Roomhy gave me confidence. Found a great place near my campus."</p><h4 class="font-bold text-gray-900 mt-4">Rohan Mehra</h4><p class="text-sm text-gray-500">Medical Student, AIIMS</p></div></div>
+                        <div class="w-full flex-shrink-0 px-4"><div class="light-card rounded-2xl p-8 text-center"><img src="https://i.pravatar.cc/150?u=a042581f4e29026704b" alt="Anjali Singh" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-purple-400"><p class="text-gray-600 italic">"The customer support is amazing! They helped me with all my queries before booking. The apartment I found is perfect and exactly what I needed."</p><h4 class="font-bold text-gray-900 mt-4">Anjali Singh</h4><p class="text-sm text-gray-500">Design Student, NIFT</p></div></div>
+                    </div>
+                </div>
+                <button id="prevBtn" class="absolute top-1/2 left-0 -translate-y-1/2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                <button id="nextBtn" class="absolute top-1/2 right-0 -translate-y-1/2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-gray-700"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+            </div>
+        </section>
+
+        <!-- Connect With Us -->
+        <section id="contact" class="scroll-mt-20">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Get in Touch</h2>
+                    <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-8">Have questions or need assistance? Fill out the form below, and we'll get back to you shortly.</p>
+                </div>
+                <div class="light-card p-8 md:p-12 rounded-2xl">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" placeholder="Your Name">
+                            </div>
+                             <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" placeholder="you@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <div class="text-center pt-4">
+                            <button type="submit" class="glow-button text-white px-8 py-3 rounded-lg font-semibold text-lg">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><a href="#" class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 mb-4 inline-block">Roomhy</a><p class="text-gray-500">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p></div>
+                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Explore</h4><ul class="space-y-2"><li><a href="#" class="text-gray-500 hover:text-gray-800">Apartments</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Hostels</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Co-Living</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Company</h4><ul class="space-y-2"><li><a href="#why-roomhy" class="text-gray-500 hover:text-gray-800">About Us</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Privacy Policy</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Connect</h4><div class="flex space-x-4"><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="facebook" class="w-6 h-6"></i></a><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="instagram" class="w-6 h-6"></i></a><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="twitter" class="w-6 h-6"></i></a></div></div>
+            </div>
+            <div class="mt-12 border-t border-gray-200 pt-6 text-center text-gray-500"><p>&copy; 2025 Roomhy. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        const headerInner = document.getElementById('header-inner');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                headerInner.classList.add('shadow-md');
+            } else {
+                headerInner.classList.remove('shadow-md');
+            }
+        });
+        
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a, nav a').forEach(link => {
+            link.addEventListener('click', () => { if (!mobileMenu.classList.contains('hidden')) { mobileMenu.classList.add('hidden'); }});
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section > div:not(.relative), section > h2').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Intersection Observer for offering cards
+        const cardObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${index * 100}ms`;
+                    entry.target.classList.add('card-animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.offering-card-item').forEach(card => {
+            cardObserver.observe(card);
+        });
+
+
+        // Testimonial Slider
+        const track = document.getElementById('testimonial-track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+        const slides = track.children;
+        const totalSlides = slides.length;
+
+        function updateTestimonialSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateTestimonialSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateTestimonialSlider();
+        });
+        
+        setInterval(() => {
+            nextBtn.click();
+        }, 5000);
+
+        // Offerings Slider
+        const offerSlider = document.getElementById('offerings-slider');
+        const offerPrev = document.getElementById('offer-prev');
+        const offerNext = document.getElementById('offer-next');
+        const offerCardWidth = 288 + 24; // w-72 (288px) + gap-6 (24px)
+
+        offerNext.addEventListener('click', () => {
+            offerSlider.scrollBy({ left: offerCardWidth, behavior: 'smooth' });
+        });
+
+        offerPrev.addEventListener('click', () => {
+            offerSlider.scrollBy({ left: -offerCardWidth, behavior: 'smooth' });
+        });
+
+        // Top Cities Slider
+        const citiesSlider = document.getElementById('cities-slider');
+        const citiesPrev = document.getElementById('cities-prev');
+        const citiesNext = document.getElementById('cities-next');
+        const cityCardWidth = 256 + 24; // w-64 (256px) + gap-6 (24px)
+
+        citiesNext.addEventListener('click', () => {
+            citiesSlider.scrollBy({ left: cityCardWidth, behavior: 'smooth' });
+        });
+
+        citiesPrev.addEventListener('click', () => {
+            citiesSlider.scrollBy({ left: -cityCardWidth, behavior: 'smooth' });
+        });
+
+        // Top Spaces Slider
+        const spacesSlider = document.getElementById('spaces-slider');
+        const spacesPrev = document.getElementById('spaces-prev');
+        const spacesNext = document.getElementById('spaces-next');
+        const spaceCardWidth = 320 + 24; // w-80 (320px) + gap-6 (24px)
+
+        spacesNext.addEventListener('click', () => {
+            spacesSlider.scrollBy({ left: spaceCardWidth, behavior: 'smooth' });
+        });
+
+        spacesPrev.addEventListener('click', () => {
+            spacesSlider.scrollBy({ left: -spaceCardWidth, behavior: 'smooth' });
+        });
+        
+        // Featured Stays Slider
+        const featuredSlider = document.getElementById('featured-slider');
+        const featuredPrev = document.getElementById('featured-prev');
+        const featuredNext = document.getElementById('featured-next');
+        const featuredCardWidth = 320 + 24; // w-80 (320px) + gap-6 (24px)
+
+        featuredNext.addEventListener('click', () => {
+            featuredSlider.scrollBy({ left: featuredCardWidth, behavior: 'smooth' });
+        });
+
+        featuredPrev.addEventListener('click', () => {
+            featuredSlider.scrollBy({ left: -featuredCardWidth, behavior: 'smooth' });
+        });
+
+    </script>
+</body>
+</html>
+
