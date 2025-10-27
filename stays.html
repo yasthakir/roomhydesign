@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomhy - Stays, PGs & Hostels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    keyframes: {
+                        kenburns: {
+                            '0%': { transform: 'scale(1) translate(0, 0)' },
+                            '100%': { transform: 'scale(1.1) translate(-2%, 2%)' },
+                        }
+                    },
+                    animation: {
+                        kenburns: 'kenburns 30s ease-in-out infinite alternate',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f2f6; 
+            color: #1F2937;
+            padding-bottom: 64px; /* 4rem, which is h-16 for mobile nav */
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint */
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .light-card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            transform: translateY(-4px);
+        }
+        
+        .glow-button {
+            transition: all 0.3s ease;
+        }
+        .glow-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .horizontal-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .horizontal-slider {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Custom form focus styles */
+        .form-checkbox:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .form-radio:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .form-input:focus, .form-select:focus, .form-checkbox:focus, .form-radio:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Basic style for map placeholder */
+        #map-view-container { /* Renamed for clarity */
+            height: 600px; /* Adjust height as needed */
+            background-color: #e0e0e0; /* Placeholder background */
+        }
+        
+        /* Ensure sticky sidebar doesn't overlap header */
+         @media (min-width: 1024px) {
+            #filter-sidebar {
+                top: 100px; /* Adjust based on header height (h-20 = 5rem = 80px) + some space */
+            }
+         }
+
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex h-20 items-center justify-between">
+                <a href="index.html" class="flex-shrink-0">
+                    <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
+                </a>
+                <nav class="hidden items-center space-x-6 lg:flex">
+                    <a href="index.html#why-roomhy" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About Us</a>
+                    <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                    <a href="index.html#register-property" class="ml-4 flex items-center space-x-1 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Post Your Property</span>
+                    </a>
+                </nav>
+                <button id="menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden">
+                    <i data-lucide="menu" class="w-7 h-7 text-gray-800"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative py-20 md:py-28 text-white">
+        <div id="hero-image-wrapper" class="absolute inset-0 w-full h-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1980&auto:format&fit=crop" alt="Hero background 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out animate-kenburns opacity-100">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto:format&fit=crop" alt="Hero background 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out animate-kenburns opacity-0">
+            <img src="https://images.unsplash.com/photo-1494203484021-3c454daf695d?q=80&w=2070&auto:format&fit=crop" alt="Hero background 3" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out animate-kenburns opacity-0">
+            <div class="absolute inset-0 w-full h-full bg-black/60"></div> 
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-shadow mb-6">Find your perfect stay</h1>
+            <div class="relative w-full max-w-2xl mx-auto">
+                <input type="text" placeholder="Search location e.g., 'Koramangala, Bangalore'" class="w-full p-4 pl-5 pr-14 rounded-lg bg-white text-gray-900 border-transparent focus:ring-4 focus:ring-cyan-300/50 focus:outline-none placeholder-gray-500 shadow-lg">
+                <button type="submit" class="absolute right-2.5 top-1/2 -translate-y-1/2 p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+                    <i data-lucide="search" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-white z-50 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+         <div class="flex justify-between items-center p-4 border-b flex-shrink-0">
+            <h2 class="text-xl font-bold text-blue-600">Menu</h2>
+            <button id="menu-close" class="p-2"><i data-lucide="x" class="w-6 h-6 text-gray-700"></i></button>
+        </div>
+        <div class="p-4 border-b"><p class="text-gray-800 font-medium">Hi, User Name</p></div>
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+             <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="briefcase" class="w-5 h-5"></i><span>My Bookings</span></a>
+            <a href="index.html#register-property" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="building" class="w-5 h-5"></i><span>List Your Property</span></a>
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="life-buoy" class="w-5 h-5"></i><span>24/7 Support</span></a>
+             <a href="index.html#why-roomhy" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="info" class="w-5 h-5"></i><span>About Us</span></a>
+            <a href="index.html#contact" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="mail" class="w-5 h-5"></i><span>Contact Us</span></a>
+        </nav>
+        <div class="p-4 border-t flex-shrink-0">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i><span>Logout</span></a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-12 mt-8">
+        
+         <div class="flex items-center justify-between space-x-2 mb-6 lg:hidden">
+            <button id="filter-toggle" class="flex-shrink-0 flex items-center justify-center space-x-2 bg-white text-blue-600 font-semibold px-4 py-3 rounded-lg shadow">
+                <i data-lucide="filter" class="w-5 h-5"></i>
+                <span>Filter</span>
+            </button>
+            <div class="flex-grow">
+                 <label for="sort-mobile" class="sr-only">Sort by</label>
+                <select id="sort-mobile" name="sort-mobile" class="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3">
+                    <option>Relevance</option>
+                    <option>Price Low-High</option>
+                    <option>Price High-Low</option>
+                    <option>Rating High-Low</option>
+                </select>
+            </div>
+             <button id="view-toggle-button-mobile" class="flex-shrink-0 flex items-center justify-center space-x-2 bg-white text-blue-600 font-semibold px-4 py-3 rounded-lg shadow">
+                <i data-lucide="map" class="w-5 h-5"></i>
+                <span>Map</span>
+             </button>
+        </div>
+
+
+        <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+            
+            <aside id="filter-sidebar" class="lg:col-span-1 lg:sticky h-fit hidden lg:block mb-8 lg:mb-0"> 
+                <div class="light-card rounded-2xl p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-gray-900">Filters</h3>
+                        <button class="text-sm text-blue-600 hover:text-blue-800 font-medium">Clear All</button>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Property Type</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">PG / Co-Living</span></label>
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Hostel</span></label>
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Apartment</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Price Range (per month)</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center text-gray-700"><input type="radio" name="price" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Below ₹8,000</span></label>
+                                <label class="flex items-center text-gray-700"><input type="radio" name="price" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">₹8,000 - ₹12,000</span></label>
+                                <label class="flex items-center text-gray-700"><input type="radio" name="price" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">₹12,000 - ₹15,000</span></label>
+                                <label class="flex items-center text-gray-700"><input type="radio" name="price" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Above ₹15,000</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Gender</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center text-gray-700"><input type="radio" name="gender" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Any</span></label>
+                                <label class="flex items-center text-gray-700"><input type="radio" name="gender" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Boys</span></label>
+                                <label class="flex items-center text-gray-700"><input type="radio" name="gender" class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Girls</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Amenities</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Wi-Fi</span></label>
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Food Included</span></label>
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">AC</span></label>
+                                <label class="flex items-center text-gray-700"><input type="checkbox" class="form-checkbox h-5 w-5 rounded text-blue-600 border-gray-300 focus:ring-blue-500"><span class="ml-3">Laundry</span></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full glow-button text-white px-8 py-3 rounded-lg font-semibold text-lg" style="background: linear-gradient(90deg, #06b6d4, #3b82f6); box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);">Apply Filters</button>
+                    </form>
+                </div>
+            </aside>
+
+            <div class="lg:col-span-3"> 
+                 <div class="hidden lg:flex items-center justify-between mb-6">
+                     <div>
+                        <h2 class="text-3xl font-bold text-gray-900">Stays in Bangalore</h2>
+                        <p class="text-gray-500 mt-1">Showing 1-12 of 45 properties</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                         <div>
+                             <label for="sort-desktop" class="sr-only">Sort by</label>
+                            <select id="sort-desktop" name="sort-desktop" class="form-select w-full sm:w-auto rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3">
+                                <option>Sort by: Relevance</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Rating: High to Low</option>
+                            </select>
+                        </div>
+                         <button id="view-toggle-button-desktop" class="flex items-center justify-center space-x-2 bg-white text-blue-600 font-semibold px-4 py-3 rounded-lg shadow">
+                            <i data-lucide="map" class="w-5 h-5"></i>
+                            <span>Map View</span>
+                         </button>
+                    </div>
+                </div>
+
+                <div id="stays-list-view">
+                    <section>
+                         <div class="lg:hidden mb-4">
+                            <h2 class="text-2xl font-bold text-gray-900">Stays in Bangalore</h2>
+                            <p class="text-gray-500 mt-1 text-sm">Showing 1-12 of 45 properties</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <a href="#" class="group block"><div class="light-card rounded-xl overflow-hidden h-full"><div class="relative"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto:format&fit=crop" alt="Girls Hostel" class="w-full h-56 object-cover"><div class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1"><i data-lucide="shield-check" class="w-4 h-4"></i><span>Verified</span></div></div><div class="p-5 text-left bg-white"><span class="text-xs text-pink-800 bg-pink-100 px-2 py-1 rounded-full font-medium">Girls Hostel</span><h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">Athena House</h3><p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Hinjewadi, Pune</p><div class="flex justify-between items-center"><p class="text-lg font-bold text-gray-900">₹10,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p><div class="flex items-center space-x-1"><i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i><span class="font-semibold text-gray-800">4.7</span><span class="text-sm text-gray-500">(21)</span></div></div></div></div></a>
+                            <a href="#" class="group block"><div class="light-card rounded-xl overflow-hidden h-full"><div class="relative"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1916&auto:format&fit=crop" alt="Modern PG" class="w-full h-56 object-cover"></div><div class="p-5 text-left bg-white"><span class="text-xs text-blue-800 bg-blue-100 px-2 py-1 rounded-full font-medium">Co-Living</span><h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">The Scholar's Loft</h3><p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Koramangala, BLR</p><div class="flex justify-between items-center"><p class="text-lg font-bold text-gray-900">₹16,500 <span class="text-sm font-normal text-gray-500">/ mo</span></p><div class="flex items-center space-x-1"><i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i><span class="font-semibold text-gray-800">4.2</span><span class="text-sm text-gray-500">(15)</span></div></div></div></div></a>
+                            <a href="#" class="group block"><div class="light-card rounded-xl overflow-hidden h-full"><div class="relative"><img src="https://images.unsplash.com/photo-1567016432779-1fee749a1532?q=80&w=1974&auto:format&fit=crop" alt="Private Room" class="w-full h-56 object-cover"><div class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1"><i data-lucide="shield-check" class="w-4 h-4"></i><span>Verified</span></div></div><div class="p-5 text-left bg-white"><span class="text-xs text-green-800 bg-green-100 px-2 py-1 rounded-full font-medium">Private Studio</span><h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">Campus Corner</h3><p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>North Campus, Delhi</p><div class="flex justify-between items-center"><p class="text-lg font-bold text-gray-900">₹13,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p><div class="flex items-center space-x-1"><i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i><span class="font-semibold text-gray-800">4.5</span><span class="text-sm text-gray-500">(32)</span></div></div></div></div></a>
+                            <a href="#" class="group block"><div class="light-card rounded-xl overflow-hidden h-full"><div class="relative"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto:format&fit=crop" alt="Indore Space 1" class="w-full h-56 object-cover"></div><div class="p-5 text-left bg-white"><span class="text-xs text-blue-800 bg-blue-100 px-2 py-1 rounded-full font-medium">Boys PG</span><h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">Modern Student Hub</h3><p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Vijay Nagar, Indore</p><div class="flex justify-between items-center"><p class="text-lg font-bold text-gray-900">₹8,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p><div class="flex items-center space-x-1"><i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i><span class="font-semibold text-gray-800">4.0</span><span class="text-sm text-gray-500">(8)</span></div></div></div></div></a>
+                            <a href="#" class="group block"><div class="light-card rounded-xl overflow-hidden h-full"><div class="relative"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto:format&fit=crop" alt="Indore Space 2" class="w-full h-56 object-cover"><div class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full flex items-center space-x-1"><i data-lucide="shield-check" class="w-4 h-4"></i><span>Verified</span></div></div><div class="p-5 text-left bg-white"><span class="text-xs text-purple-800 bg-purple-100 px-2 py-1 rounded-full font-medium">Apartment</span><h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">The Scholar's Den</h3><p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Bhawarkua, Indore</p><div class="flex justify-between items-center"><p class="text-lg font-bold text-gray-900">₹9,500 <span class="text-sm font-normal text-gray-500">/ mo</span></p><div class="flex items-center space-x-1"><i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i><span class="font-semibold text-gray-800">4.4</span><span class="text-sm text-gray-500">(19)</span></div></div></div></div></a>
+                             <a href="#" class="group block"><div class="light-card rounded-xl overflow-hidden h-full"><div class="relative"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto:format&fit=crop" alt="Indore Space 4" class="w-full h-56 object-cover"></div><div class="p-5 text-left bg-white"><span class="text-xs text-blue-800 bg-blue-100 px-2 py-1 rounded-full font-medium">Co-Living</span><h3 class="text-xl font-bold mt-3 mb-2 text-gray-900">Prime Student Living</h3><p class="text-gray-500 flex items-center mb-4"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Saket Nagar, Indore</p><div class="flex justify-between items-center"><p class="text-lg font-bold text-gray-900">₹11,000 <span class="text-sm font-normal text-gray-500">/ mo</span></p><div class="flex items-center space-x-1"><i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i><span class="font-semibold text-gray-800">4.1</span><span class="text-sm text-gray-500">(12)</span></div></div></div></div></a>
+                        </div> 
+                        <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0 mt-12 pt-8">
+                            <div class="flex-1 flex justify-between sm:hidden"> <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Previous </a> <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Next </a></div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div><p class="text-sm text-gray-700">Showing <span class="font-medium">1</span> to <span class="font-medium">12</span> of <span class="font-medium">45</span> results</p></div>
+                                <div><nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination"><a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"><span class="sr-only">Previous</span><i data-lucide="chevron-left" class="h-5 w-5"></i></a><a href="#" aria-current="page" class="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 1 </a><a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 2 </a><a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 3 </a><span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"> ... </span><a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 8 </a><a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"><span class="sr-only">Next</span><i data-lucide="chevron-right" class="h-5 w-5"></i></a></nav></div>
+                            </div>
+                        </nav>
+                    </section>
+                </div>
+
+                <div id="map-view-container" class="hidden rounded-lg shadow-lg"> <div class="w-full h-full flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg"> Map Placeholder - Integrate your map library here.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="md:col-span-1"><a href="index.html" class="mb-4 inline-block"><img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto brightness-0 invert"></a><p class="text-gray-400 text-sm">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p><div class="flex space-x-5 mt-6"><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a></div></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Explore</h4><ul class="space-y-3"><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Apartments</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Hostels</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Co-Living</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">PGs</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Company</h4><ul class="space-y-3"><li><a href="index.html#why-roomhy" class="text-gray-300 hover:text-white transition-colors">About Us</a></li><li><a href="index.html#register-property" class="text-gray-300 hover:text-white transition-colors">List Your Property</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Get in Touch</h4><ul class="space-y-3"><li class="flex items-start space-x-2"><i data-lucide="mail" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="mailto:support@roomhy.com" class="text-gray-300 hover:text-white transition-colors">support@roomhy.com</a></li><li class="flex items-start space-x-2"><i data-lucide="phone" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="tel:+911234567890" class="text-gray-300 hover:text-white transition-colors">+91 12345 67890</a></li><li class="flex items-start space-x-2"><i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><span class="text-gray-300">Bengaluru, India</span></li></ul></div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm"><p>&copy; 2025 Roomhy. All Rights Reserved. Built with ❤️ for students.</p></div>
+        </div>
+    </footer>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-gray-200 z-30 lg:hidden">
+        <div class="container mx-auto px-4 h-16 flex justify-around items-center max-w-lg">
+            <a href="index.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="home" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Home</span></a>
+            <a href="stays.html" class="flex flex-col items-center justify-center text-blue-600"><i data-lucide="layout-grid" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Stays</span></a>
+            <a href="#chat" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="message-circle" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Chat</span></a>
+            <a href="#save" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="heart" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Save</span></a>
+            <a href="#profile" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="user" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Profile</span></a>
+        </div>
+    </nav>
+
+
+    <script>
+        lucide.createIcons();
+
+        /* Mobile Side Menu JS */
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        if (menuToggle && mobileMenu && menuClose && menuOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                menuOverlay.classList.remove('hidden');
+            });
+            const closeMenu = () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuOverlay.classList.add('hidden');
+            };
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', closeMenu); });
+        }
+        
+        /* Mobile Filter Toggle JS */
+        const filterToggle = document.getElementById('filter-toggle');
+        const filterSidebar = document.getElementById('filter-sidebar');
+
+        if (filterToggle && filterSidebar) {
+            filterToggle.addEventListener('click', () => {
+                const isHidden = filterSidebar.classList.toggle('hidden');
+                if (isHidden) {
+                    filterToggle.innerHTML = '<i data-lucide="filter" class="w-5 h-5"></i> <span>Filter</span>';
+                } else {
+                    filterToggle.innerHTML = '<i data-lucide="x" class="w-5 h-5"></i> <span>Hide</span>';
+                }
+                lucide.createIcons(); 
+            });
+        }
+        
+        /* Hero Slideshow JS */
+        const heroWrapper = document.getElementById('hero-image-wrapper');
+        if (heroWrapper) {
+            const heroImages = heroWrapper.querySelectorAll('img');
+            const totalHeroImages = heroImages.length;
+            let currentHeroIndex = 0;
+
+            if (totalHeroImages > 1) {
+                setInterval(() => {
+                    const nextHeroIndex = (currentHeroIndex + 1) % totalHeroImages;
+                    heroImages[currentHeroIndex].classList.remove('opacity-100');
+                    heroImages[currentHeroIndex].classList.add('opacity-0');
+                    heroImages[nextHeroIndex].classList.remove('opacity-0');
+                    heroImages[nextHeroIndex].classList.add('opacity-100');
+                    currentHeroIndex = nextHeroIndex;
+                }, 5000); 
+            }
+        }
+
+        /* List/Map View Toggle JS (Handles both Mobile and Desktop) */
+        const viewToggleButtonMobile = document.getElementById('view-toggle-button-mobile');
+        const viewToggleButtonDesktop = document.getElementById('view-toggle-button-desktop');
+        const staysListView = document.getElementById('stays-list-view');
+        const mapViewContainer = document.getElementById('map-view-container'); // Use the map container ID
+        // Filter sidebar already defined above
+        // Filter toggle button already defined above
+
+        let isMapView = false; // Shared state for map view
+
+        function toggleView(buttonElement) {
+            isMapView = !isMapView; 
+
+            staysListView.classList.toggle('hidden');
+            mapViewContainer.classList.toggle('hidden');
+
+            const isMobile = window.innerWidth < 1024;
+            
+            let icon = isMapView ? 'list' : 'map';
+            let text = isMapView ? (isMobile ? 'List' : 'List View') : (isMobile ? 'Map' : 'Map View');
+            
+            // Update both buttons if they exist
+            [viewToggleButtonMobile, viewToggleButtonDesktop].forEach(btn => {
+                if(btn) {
+                     btn.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5"></i> <span>${text}</span>`;
+                }
+            });
+
+            // Handle filter visibility specifically for mobile when toggling view
+            if (isMobile) {
+                if (isMapView) {
+                    // Hide filter button and sidebar when switching TO map view
+                    if (filterToggle) filterToggle.classList.add('hidden');
+                    if (filterSidebar) filterSidebar.classList.add('hidden');
+                } else {
+                    // Show filter button when switching back TO list view
+                    if (filterToggle) filterToggle.classList.remove('hidden');
+                    // Sidebar visibility depends on its previous state (check filter button text)
+                    if (filterToggle && filterToggle.textContent.includes("Hide")) {
+                        if (filterSidebar) filterSidebar.classList.remove('hidden');
+                    } else {
+                         if (filterSidebar) filterSidebar.classList.add('hidden');
+                    }
+                }
+            } else {
+                 // On Desktop, filter sidebar is always visible regardless of map/list view
+                 if (filterSidebar) filterSidebar.classList.remove('hidden', 'lg:hidden'); // Ensure it's visible
+                 if (filterToggle) filterToggle.classList.add('hidden'); // Ensure mobile toggle is hidden
+            }
+
+            lucide.createIcons(); // Re-render icons
+        }
+
+        if (viewToggleButtonMobile) {
+            viewToggleButtonMobile.addEventListener('click', () => toggleView(viewToggleButtonMobile));
+        }
+        if (viewToggleButtonDesktop) {
+            viewToggleButtonDesktop.addEventListener('click', () => toggleView(viewToggleButtonDesktop));
+        }
+
+        // Adjust layout on resize
+         window.addEventListener('resize', () => {
+             const isMobile = window.innerWidth < 1024;
+             if (isMobile) {
+                 // Mobile view adjustments
+                 if (filterToggle) filterToggle.classList.remove('lg:hidden'); // Ensure filter toggle can be shown
+                 if (isMapView) {
+                     if (filterToggle) filterToggle.classList.add('hidden'); // Hide filter toggle in map view
+                     if (filterSidebar) filterSidebar.classList.add('hidden'); // Hide filter sidebar in map view
+                 } else {
+                      if (filterToggle) filterToggle.classList.remove('hidden'); // Show filter toggle in list view
+                      // Restore sidebar visibility based on filter toggle button state only if NOT in map view
+                      if (filterToggle && filterToggle.textContent.includes("Hide")) {
+                          if (filterSidebar) filterSidebar.classList.remove('hidden');
+                      } else {
+                          if (filterSidebar) filterSidebar.classList.add('hidden');
+                      }
+                 }
+             } else {
+                 // Desktop view adjustments
+                 if (filterToggle) filterToggle.classList.add('lg:hidden'); // Hide mobile filter toggle
+                 if (filterSidebar) {
+                     filterSidebar.classList.remove('hidden'); // Always show filter sidebar on desktop
+                     filterSidebar.classList.add('lg:block'); // Ensure grid display logic applies
+                 }
+             }
+
+             // Update Map/List Button Text based on screen size
+             let text = isMapView ? (isMobile ? 'List' : 'List View') : (isMobile ? 'Map' : 'Map View');
+             [viewToggleButtonMobile, viewToggleButtonDesktop].forEach(btn => {
+                if(btn && btn.querySelector('span')) {
+                     btn.querySelector('span').textContent = text;
+                }
+            });
+
+         });
+
+         // Initial setup on load based on screen size
+         window.dispatchEvent(new Event('resize'));
+
+
+    </script>
+</body>
+</html>

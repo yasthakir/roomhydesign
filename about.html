@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomhy - About Us</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f2f6;
+            color: #1F2937;
+            padding-bottom: 64px; /* Mobile nav height */
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint */
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text; /* For Safari */
+            color: transparent;
+            background-image: linear-gradient(to right, #3b82f6, #06b6d4); /* Blue to Cyan */
+        }
+
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-sm shadow-sm flex-shrink-0">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex h-20 items-center justify-between">
+                <a href="index.html" class="flex-shrink-0">
+                    <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
+                </a>
+                <nav class="hidden items-center space-x-6 lg:flex">
+                    <a href="about-us.html" class="text-blue-600 font-semibold transition-colors">About Us</a>
+                    <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                     <a href="list-property.html" class="ml-4 flex items-center space-x-1 bg-blue-100 text-blue-700 hover:bg-blue-200 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Post Your Property</span>
+                    </a>
+                </nav>
+                <button id="menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden">
+                    <i data-lucide="menu" class="w-7 h-7 text-gray-800"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-white z-50 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+         <div class="flex justify-between items-center p-4 border-b flex-shrink-0">
+            <h2 class="text-xl font-bold text-blue-600">Menu</h2>
+            <button id="menu-close" class="p-2"><i data-lucide="x" class="w-6 h-6 text-gray-700"></i></button>
+        </div>
+        <div class="p-4 border-b"><p class="text-gray-800 font-medium">Hi, User Name</p></div>
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+             <a href="my-bookings.html" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="briefcase" class="w-5 h-5"></i><span>My Bookings</span></a>
+            <a href="list-property.html" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="building" class="w-5 h-5"></i><span>List Your Property</span></a>
+            <a href="support.html" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="life-buoy" class="w-5 h-5"></i><span>24/7 Support</span></a>
+             <a href="about-us.html" class="flex items-center space-x-3 p-3 rounded-lg text-blue-700 bg-blue-50 font-semibold">
+                <i data-lucide="info" class="w-5 h-5"></i><span>About Us</span></a>
+            <a href="index.html#contact" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="mail" class="w-5 h-5"></i><span>Contact Us</span></a>
+        </nav>
+        <div class="p-4 border-t flex-shrink-0">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i><span>Logout</span></a>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+
+        <section class="py-12 md:py-16 bg-gradient-to-r from-blue-50 to-cyan-50">
+            <div class="container mx-auto px-4 sm:px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold gradient-text mb-4">About Roomhy</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Simplifying student accommodation, one room at a time.</p>
+            </div>
+        </section>
+
+        <div class="container mx-auto px-4 sm:px-6 py-12 md:py-16 space-y-12 md:space-y-16 max-w-4xl">
+
+            <section class="light-card rounded-lg p-6 md:p-8 text-center">
+                <i data-lucide="target" class="w-12 h-12 text-blue-600 mx-auto mb-4"></i>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Our Mission</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    To be the most trusted and student-friendly platform for finding hassle-free accommodation, empowering students to focus on their education and personal growth by providing safe, verified, and affordable living spaces.
+                </p>
+            </section>
+
+            <section class="light-card rounded-lg p-6 md:p-8 lg:flex lg:items-center lg:gap-8">
+                <div class="lg:w-1/2 mb-6 lg:mb-0">
+                     <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop" alt="Students collaborating" class="rounded-lg shadow-md object-cover w-full h-64 lg:h-auto">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Our Story</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Roomhy was built by students, for students. We personally experienced the chaos, uncertainty, and stress of finding a reliable place to live while moving to a new city for education. Brokerage fees, unverified listings, and lack of transparency were common hurdles.
+                    </p>
+                     <p class="text-gray-600 leading-relaxed">
+                        We knew there had to be a better way. That's why we created Roomhy – a platform dedicated to simplifying the search for student homes. We're more than just a listing site; we aim to be your first friend in a new city, helping you find a comfortable and secure space where you can truly thrive.
+                    </p>
+                </div>
+            </section>
+
+             <section>
+                 <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800 text-center">Our Core Values</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     <div class="light-card rounded-lg p-6 text-center">
+                         <i data-lucide="shield-check" class="w-10 h-10 text-blue-600 mx-auto mb-3"></i>
+                         <h3 class="text-lg font-semibold mb-1">Trust & Safety</h3>
+                         <p class="text-sm text-gray-500">Prioritizing verified listings and secure processes.</p>
+                     </div>
+                     <div class="light-card rounded-lg p-6 text-center">
+                         <i data-lucide="users" class="w-10 h-10 text-blue-600 mx-auto mb-3"></i>
+                         <h3 class="text-lg font-semibold mb-1">Student-Centric</h3>
+                         <p class="text-sm text-gray-500">Putting student needs and well-being first.</p>
+                     </div>
+                     <div class="light-card rounded-lg p-6 text-center">
+                         <i data-lucide="glasses" class="w-10 h-10 text-blue-600 mx-auto mb-3"></i>
+                         <h3 class="text-lg font-semibold mb-1">Transparency</h3>
+                         <p class="text-sm text-gray-500">Providing clear information and zero brokerage.</p>
+                     </div>
+                 </div>
+             </section>
+
+             <section>
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-gray-800 text-center">Meet the Team (Placeholder)</h2>
+                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
+                     <div>
+                        <img src="https://i.pravatar.cc/150?u=team_member_1" alt="Team Member 1" class="w-24 h-24 rounded-full mx-auto mb-2 border-4 border-gray-100 shadow-sm">
+                        <h4 class="font-semibold text-gray-800">Founder Name</h4>
+                        <p class="text-sm text-gray-500">CEO & Co-Founder</p>
+                     </div>
+                     <div>
+                        <img src="https://i.pravatar.cc/150?u=team_member_2" alt="Team Member 2" class="w-24 h-24 rounded-full mx-auto mb-2 border-4 border-gray-100 shadow-sm">
+                        <h4 class="font-semibold text-gray-800">Founder Name</h4>
+                        <p class="text-sm text-gray-500">CTO & Co-Founder</p>
+                     </div>
+                      <div>
+                        <img src="https://i.pravatar.cc/150?u=team_member_3" alt="Team Member 3" class="w-24 h-24 rounded-full mx-auto mb-2 border-4 border-gray-100 shadow-sm">
+                        <h4 class="font-semibold text-gray-800">Team Member</h4>
+                        <p class="text-sm text-gray-500">Lead Operations</p>
+                     </div>
+                      <div>
+                        <img src="https://i.pravatar.cc/150?u=team_member_4" alt="Team Member 4" class="w-24 h-24 rounded-full mx-auto mb-2 border-4 border-gray-100 shadow-sm">
+                        <h4 class="font-semibold text-gray-800">Team Member</h4>
+                        <p class="text-sm text-gray-500">Marketing Head</p>
+                     </div>
+                      </div>
+             </section>
+
+            <section class="text-center pt-8">
+                 <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Ready to Find Your Home?</h2>
+                 <p class="text-gray-600 mb-6 max-w-lg mx-auto">Explore thousands of verified PGs, hostels, and apartments near your campus.</p>
+                  <a href="stays.html" class="inline-flex items-center justify-center py-3 px-8 border border-transparent shadow-sm text-lg font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors space-x-2">
+                     <i data-lucide="search" class="w-5 h-5"></i>
+                    <span>Explore Stays Now</span>
+                </a>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 flex-shrink-0 mt-auto">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="md:col-span-1"><a href="index.html" class="mb-4 inline-block"><img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto brightness-0 invert"></a><p class="text-gray-400 text-sm">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p><div class="flex space-x-5 mt-6"><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a></div></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Explore</h4><ul class="space-y-3"><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Apartments</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Hostels</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Co-Living</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">PGs</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Company</h4><ul class="space-y-3"><li><a href="about-us.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li><li><a href="list-property.html" class="text-gray-300 hover:text-white transition-colors">List Your Property</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Get in Touch</h4><ul class="space-y-3"><li class="flex items-start space-x-2"><i data-lucide="mail" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="mailto:support@roomhy.com" class="text-gray-300 hover:text-white transition-colors">support@roomhy.com</a></li><li class="flex items-start space-x-2"><i data-lucide="phone" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="tel:+911234567890" class="text-gray-300 hover:text-white transition-colors">+91 12345 67890</a></li><li class="flex items-start space-x-2"><i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><span class="text-gray-300">Bengaluru, India</span></li></ul></div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm"><p>&copy; 2025 Roomhy. All Rights Reserved. Built with ❤️ for students.</p></div>
+        </div>
+    </footer>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-gray-200 z-30 lg:hidden flex-shrink-0">
+        <div class="container mx-auto px-4 h-16 flex justify-around items-center max-w-lg">
+            <a href="index.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="home" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Home</span></a>
+            <a href="stays.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"> <i data-lucide="layout-grid" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Stays</span></a>
+            <a href="chat.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="message-circle" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Chat</span></a>
+            <a href="save.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"> <i data-lucide="heart" class="w-6 h-6"></i> <span class="text-xs font-medium mt-0.5">Save</span> </a>
+            <a href="profile.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="user" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Profile</span></a>
+        </div>
+    </nav>
+
+
+    <script>
+        lucide.createIcons();
+
+        /* Mobile Side Menu JS */
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        if (menuToggle && mobileMenu && menuClose && menuOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                menuOverlay.classList.remove('hidden');
+            });
+            const closeMenu = () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuOverlay.classList.add('hidden');
+            };
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            // Close menu if a link inside it is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => { 
+                link.addEventListener('click', (e) => {
+                    // Basic check if it's an internal page link vs external
+                    if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+                        closeMenu();
+                    }
+                }); 
+            });
+        }
+    </script>
+</body>
+</html>

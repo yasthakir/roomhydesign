@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomhy - List Your Property</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f2f6;
+            color: #1F2937;
+            padding-bottom: 64px; /* Mobile nav height */
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint */
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+
+        /* Custom form focus styles */
+       .form-input:focus, .form-select:focus, .form-textarea:focus, input[type="file"]:focus-within {
+            outline: none;
+            border-color: #3b82f6; /* Blue border */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); /* Blue ring */
+        }
+        .form-checkbox:checked, .form-radio:checked {
+             border-color: #3b82f6;
+             background-color: #3b82f6;
+        }
+         .form-checkbox:checked:focus, .form-radio:checked:focus {
+             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+         }
+
+
+        /* Style for file input area */
+         .file-drop-area {
+            border: 2px dashed #d1d5db; /* gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f9fafb; /* gray-50 */
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+         }
+         .file-drop-area:hover {
+             background-color: #f3f4f6; /* gray-100 */
+             border-color: #9ca3af; /* gray-400 */
+         }
+         /* Hide default file input visually but keep accessible */
+        .file-input-hidden {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        .file-input-label {
+             cursor: pointer;
+        }
+
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-sm shadow-sm flex-shrink-0">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex h-20 items-center justify-between">
+                <a href="index.html" class="flex-shrink-0">
+                    <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
+                </a>
+                <nav class="hidden items-center space-x-6 lg:flex">
+                    <a href="index.html#why-roomhy" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About Us</a>
+                    <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                     <a href="list-property.html" class="ml-4 flex items-center space-x-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors hover:bg-blue-700">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Post Your Property</span>
+                    </a>
+                </nav>
+                <button id="menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden">
+                    <i data-lucide="menu" class="w-7 h-7 text-gray-800"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-white z-50 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b flex-shrink-0">
+            <h2 class="text-xl font-bold text-blue-600">Menu</h2>
+            <button id="menu-close" class="p-2">
+                <i data-lucide="x" class="w-6 h-6 text-gray-700"></i>
+            </button>
+        </div>
+        <div class="p-4 border-b">
+            <p class="text-gray-800 font-medium">Hi, User Name</p> 
+        </div>
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+            <a href="my-bookings.html" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <i data-lucide="briefcase" class="w-5 h-5"></i>
+                <span>My Bookings</span>
+            </a>
+            <a href="list-property.html" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <i data-lucide="building" class="w-5 h-5"></i>
+                <span>List Your Property</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <i data-lucide="life-buoy" class="w-5 h-5"></i>
+                <span>24/7 Support</span>
+            </a>
+            <a href="index.html#why-roomhy" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <i data-lucide="info" class="w-5 h-5"></i>
+                <span>About Us</span>
+            </a>
+            <a href="index.html#contact" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+                <span>Contact Us</span>
+            </a>
+        </nav>
+        <div class="p-4 border-t flex-shrink-0">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600">
+                <i data-lucide="log-out" class="w-5 h-5"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-12 mt-8 flex-grow">
+
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">List Your Property</h1>
+            <p class="text-center text-gray-600 mb-10 -mt-4">Fill in the details below to reach thousands of students.</p>
+
+            <form action="#" method="POST" class="space-y-8">
+                <div class="light-card rounded-lg p-6 md:p-8">
+                    <div class="flex items-center mb-6 border-b pb-4">
+                        <i data-lucide="clipboard-list" class="w-6 h-6 mr-3 text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Basic Information</h2>
+                    </div>
+                    <div class="space-y-6">
+                         <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Property Type <span class="text-red-500">*</span></label>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center space-x-2"><input type="radio" name="property_type" value="pg" required class="form-radio h-4 w-4 text-blue-600 border-gray-300"><span class="text-gray-700">PG / Co-Living</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="property_type" value="hostel" required class="form-radio h-4 w-4 text-blue-600 border-gray-300"><span class="text-gray-700">Hostel</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="property_type" value="apartment" required class="form-radio h-4 w-4 text-blue-600 border-gray-300"><span class="text-gray-700">Apartment / Flat</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="property-name" class="block text-sm font-medium text-gray-700 mb-1">Property Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="property-name" name="property_name" required class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="e.g., Sunshine PG for Girls">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div>
+                                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Street Address <span class="text-red-500">*</span></label>
+                                <input type="text" id="address" name="address" required class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="Building No, Street Name, Area">
+                             </div>
+                             <div>
+                                <label for="landmark" class="block text-sm font-medium text-gray-700 mb-1">Landmark (Optional)</label>
+                                <input type="text" id="landmark" name="landmark" class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="Near XYZ College">
+                             </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City <span class="text-red-500">*</span></label>
+                                <input type="text" id="city" name="city" required class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="e.g., Bangalore">
+                            </div>
+                             <div>
+                                <label for="pincode" class="block text-sm font-medium text-gray-700 mb-1">Pincode <span class="text-red-500">*</span></label>
+                                <input type="text" id="pincode" name="pincode" required pattern="\d{6}" title="Enter 6 digit pincode" class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="e.g., 560001">
+                            </div>
+                        </div>
+                         <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea id="description" name="description" rows="4" class="form-textarea w-full border-gray-300 rounded-md shadow-sm" placeholder="Highlight key features, rules, and why students should choose your property..."></textarea>
+                            <p class="mt-1 text-xs text-gray-500">Max 500 characters.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="light-card rounded-lg p-6 md:p-8">
+                     <div class="flex items-center mb-6 border-b pb-4">
+                        <i data-lucide="sparkles" class="w-6 h-6 mr-3 text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Amenities Offered</h2>
+                     </div>
+                     <p class="text-sm text-gray-500 mb-4">Select all amenities available at your property.</p>
+                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="wifi" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Wi-Fi</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="food" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Food Included</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="ac" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">AC</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="laundry" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Laundry</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="security" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Security (CCTV)</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="housekeeping" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Housekeeping</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="power_backup" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Power Backup</span></label>
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="parking" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Parking</span></label>
+                         <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="furnished" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Furnished</span></label>
+                         <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="tv" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">TV</span></label>
+                         <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="fridge" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Refrigerator</span></label>
+                         <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"><input type="checkbox" name="amenities[]" value="water_purifier" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-3 text-sm text-gray-700">Water Purifier</span></label>
+                    </div>
+                </div>
+
+                 <div class="light-card rounded-lg p-6 md:p-8">
+                     <div class="flex items-center mb-6 border-b pb-4">
+                        <i data-lucide="indian-rupee" class="w-6 h-6 mr-3 text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Pricing & Occupancy</h2>
+                    </div>
+                     <div class="space-y-6">
+                         <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Gender Suitability <span class="text-red-500">*</span></label>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center space-x-2"><input type="radio" name="gender" value="boys" required class="form-radio h-4 w-4 text-blue-600 border-gray-300"><span class="text-gray-700">Boys Only</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="gender" value="girls" required class="form-radio h-4 w-4 text-blue-600 border-gray-300"><span class="text-gray-700">Girls Only</span></label>
+                                <label class="flex items-center space-x-2"><input type="radio" name="gender" value="coed" required class="form-radio h-4 w-4 text-blue-600 border-gray-300"><span class="text-gray-700">Co-Ed</span></label>
+                            </div>
+                        </div>
+
+                         <div class="space-y-4 pt-4 border-t border-gray-100">
+                             <p class="text-sm font-medium text-gray-700">Available Room Types & Monthly Rent (per person) <span class="text-red-500">*</span> <span class="text-xs text-gray-500 font-normal">(Check applicable types and enter rent)</span></p>
+                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2 items-center">
+                                <label class="flex items-center col-span-1 sm:col-span-1 py-2"><input type="checkbox" id="single_sharing_check" name="room_types[]" value="single" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-2 text-sm text-gray-700">Single Sharing</span></label>
+                                <div class="col-span-1 sm:col-span-2">
+                                    <label for="single_sharing_price" class="sr-only">Single Sharing Price</label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-gray-500 sm:text-sm">₹</span></div>
+                                        <input type="number" name="single_sharing_price" id="single_sharing_price" class="form-input block w-full pl-7 pr-16 sm:text-sm border-gray-300 rounded-md" placeholder="e.g., 15000">
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><span class="text-gray-500 sm:text-sm">/ month</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2 items-center">
+                                <label class="flex items-center col-span-1 sm:col-span-1 py-2"><input type="checkbox" id="double_sharing_check" name="room_types[]" value="double" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-2 text-sm text-gray-700">Double Sharing</span></label>
+                                <div class="col-span-1 sm:col-span-2">
+                                    <label for="double_sharing_price" class="sr-only">Double Sharing Price</label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-gray-500 sm:text-sm">₹</span></div>
+                                        <input type="number" name="double_sharing_price" id="double_sharing_price" class="form-input block w-full pl-7 pr-16 sm:text-sm border-gray-300 rounded-md" placeholder="e.g., 12000">
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><span class="text-gray-500 sm:text-sm">/ month</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2 items-center">
+                                <label class="flex items-center col-span-1 sm:col-span-1 py-2"><input type="checkbox" id="triple_sharing_check" name="room_types[]" value="triple" class="form-checkbox h-4 w-4 rounded text-blue-600 border-gray-300"><span class="ml-2 text-sm text-gray-700">Triple Sharing</span></label>
+                                <div class="col-span-1 sm:col-span-2">
+                                    <label for="triple_sharing_price" class="sr-only">Triple Sharing Price</label>
+                                    <div class="relative rounded-md shadow-sm">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-gray-500 sm:text-sm">₹</span></div>
+                                        <input type="number" name="triple_sharing_price" id="triple_sharing_price" class="form-input block w-full pl-7 pr-16 sm:text-sm border-gray-300 rounded-md" placeholder="e.g., 10000">
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><span class="text-gray-500 sm:text-sm">/ month</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+
+                        <div>
+                            <label for="deposit" class="block text-sm font-medium text-gray-700 mb-1 mt-6">Security Deposit <span class="text-red-500">*</span></label>
+                            <select id="deposit" name="deposit" required class="form-select w-full md:w-1/2 border-gray-300 rounded-md shadow-sm">
+                                <option value="">Select Deposit</option>
+                                <option value="0">No Deposit</option>
+                                <option value="1">1 Month Rent</option>
+                                <option value="2">2 Months Rent</option>
+                                <option value="3">3 Months Rent</option>
+                            </select>
+                        </div>
+                    </div>
+                 </div>
+
+                <div class="light-card rounded-lg p-6 md:p-8">
+                     <div class="flex items-center mb-6 border-b pb-4">
+                        <i data-lucide="image" class="w-6 h-6 mr-3 text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Property Photos</h2>
+                    </div>
+                     <div>
+                        <label for="property-photos" class="file-input-label block text-sm font-medium text-gray-700 mb-2">Upload Photos (Select multiple, min 3 recommended) <span class="text-red-500">*</span></label>
+                        <div class="mt-1 file-drop-area">
+                             <input type="file" id="property-photos" name="property_photos[]" multiple required accept="image/jpeg, image/png, image/webp" class="file-input-hidden">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <i data-lucide="upload-cloud" class="w-10 h-10 mb-3 text-gray-400"></i>
+                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold text-blue-600 hover:underline">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500">JPG, PNG, WEBP (MAX. 5MB per photo)</p>
+                            </div>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500">Tip: Upload clear, well-lit photos of rooms, common areas, bathrooms, and exterior views.</p>
+                         <div id="image-previews" class="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+                            </div>
+                     </div>
+                 </div>
+
+                <div class="light-card rounded-lg p-6 md:p-8">
+                     <div class="flex items-center mb-6 border-b pb-4">
+                        <i data-lucide="phone" class="w-6 h-6 mr-3 text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Your Contact Information</h2>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">This information will be used by students to contact you.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-1">Contact Person Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="contact-name" name="contact_name" required class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="Your Full Name">
+                        </div>
+                        <div>
+                            <label for="contact-phone" class="block text-sm font-medium text-gray-700 mb-1">Contact Phone <span class="text-red-500">*</span></label>
+                            <input type="tel" id="contact-phone" name="contact_phone" required pattern="[6-9]\d{9}" title="Enter valid 10 digit Indian mobile number" class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="10-digit Mobile Number">
+                        </div>
+                         <div class="md:col-span-2">
+                             <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
+                             <input type="email" id="contact-email" name="contact_email" class="form-input w-full border-gray-300 rounded-md shadow-sm" placeholder="your.email@example.com (Optional)">
+                        </div>
+                    </div>
+                     <div class="mt-6 flex items-start">
+                         <div class="flex items-center h-5">
+                             <input id="agree-terms" name="agree_terms" type="checkbox" required class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded">
+                         </div>
+                         <div class="ml-3 text-sm">
+                            <label for="agree-terms" class="font-medium text-gray-700">I confirm that I own this property or have the authority to list it, and I agree to the Roomhy <a href="#" class="text-blue-600 hover:underline">Terms for Owners</a>.</label> <span class="text-red-500">*</span>
+                         </div>
+                     </div>
+                </div>
+
+                <div class="pt-6 text-center">
+                    <button type="submit" class="inline-flex items-center justify-center py-3 px-8 border border-transparent shadow-sm text-lg font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors space-x-2">
+                         <i data-lucide="send" class="w-5 h-5"></i>
+                        <span>Submit Listing for Review</span>
+                    </button>
+                    <p class="text-xs text-gray-500 mt-3">Your listing will be reviewed before going live.</p>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 flex-shrink-0 mt-auto">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="md:col-span-1"><a href="index.html" class="mb-4 inline-block"><img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto brightness-0 invert"></a><p class="text-gray-400 text-sm">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p><div class="flex space-x-5 mt-6"><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a></div></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Explore</h4><ul class="space-y-3"><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Apartments</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Hostels</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Co-Living</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">PGs</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Company</h4><ul class="space-y-3"><li><a href="index.html#why-roomhy" class="text-gray-300 hover:text-white transition-colors">About Us</a></li><li><a href="index.html#register-property" class="text-gray-300 hover:text-white transition-colors">List Your Property</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Get in Touch</h4><ul class="space-y-3"><li class="flex items-start space-x-2"><i data-lucide="mail" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="mailto:support@roomhy.com" class="text-gray-300 hover:text-white transition-colors">support@roomhy.com</a></li><li class="flex items-start space-x-2"><i data-lucide="phone" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="tel:+911234567890" class="text-gray-300 hover:text-white transition-colors">+91 12345 67890</a></li><li class="flex items-start space-x-2"><i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><span class="text-gray-300">Bengaluru, India</span></li></ul></div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm"><p>&copy; 2025 Roomhy. All Rights Reserved. Built with ❤️ for students.</p></div>
+        </div>
+    </footer>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-gray-200 z-30 lg:hidden flex-shrink-0">
+        <div class="container mx-auto px-4 h-16 flex justify-around items-center max-w-lg">
+            <a href="index.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
+                <i data-lucide="home" class="w-6 h-6"></i>
+                <span class="text-xs font-medium mt-0.5">Home</span>
+            </a>
+            <a href="stays.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"> 
+                <i data-lucide="layout-grid" class="w-6 h-6"></i>
+                <span class="text-xs font-medium mt-0.5">Stays</span>
+            </a>
+            <a href="chat.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
+                <i data-lucide="message-circle" class="w-6 h-6"></i>
+                <span class="text-xs font-medium mt-0.5">Chat</span>
+            </a>
+            <a href="save.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"> 
+                <i data-lucide="heart" class="w-6 h-6"></i> 
+                <span class="text-xs font-medium mt-0.5">Save</span> 
+            </a> 
+            <a href="profile.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
+                <i data-lucide="user" class="w-6 h-6"></i>
+                <span class="text-xs font-medium mt-0.5">Profile</span>
+            </a>
+        </div>
+    </nav>
+
+
+    <script>
+        lucide.createIcons();
+
+        /* Mobile Side Menu JS */
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        if (menuToggle && mobileMenu && menuClose && menuOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                menuOverlay.classList.remove('hidden');
+            });
+            const closeMenu = () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuOverlay.classList.add('hidden');
+            };
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', closeMenu); });
+        }
+
+        /* Image Preview Logic */
+        const photoInput = document.getElementById('property-photos');
+        const imagePreviews = document.getElementById('image-previews');
+        const fileDropArea = photoInput?.closest('.file-drop-area'); // Use optional chaining
+
+        if (photoInput && imagePreviews && fileDropArea) {
+
+            // Clicking the area triggers the input
+            fileDropArea.addEventListener('click', () => {
+                photoInput.click();
+            });
+
+            // Handle file selection
+            photoInput.addEventListener('change', function(event) {
+                handleFiles(event.target.files);
+            });
+
+            // Optional: Drag and Drop functionality
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                fileDropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            ['dragenter', 'dragover'].forEach(eventName => {
+                fileDropArea.addEventListener(eventName, () => fileDropArea.classList.add('bg-blue-50', 'border-blue-400'), false);
+            });
+            ['dragleave', 'drop'].forEach(eventName => {
+                fileDropArea.addEventListener(eventName, () => fileDropArea.classList.remove('bg-blue-50', 'border-blue-400'), false);
+            });
+            fileDropArea.addEventListener('drop', handleDrop, false);
+            function handleDrop(e) {
+                let dt = e.dataTransfer;
+                let files = dt.files;
+                handleFiles(files);
+                 // Update input's files property for form submission
+                 photoInput.files = files;
+            }
+
+            // Function to process and display files
+            function handleFiles(files) {
+                 imagePreviews.innerHTML = ''; // Clear existing previews
+                 if (files && files.length > 0) {
+                    Array.from(files).forEach((file, index) => {
+                         if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const div = document.createElement('div');
+                                div.classList.add('relative', 'w-full', 'aspect-square', 'rounded-md', 'overflow-hidden', 'border', 'border-gray-200', 'group'); // aspect-square for square previews
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.alt = `Preview ${index + 1}`;
+                                img.classList.add('w-full', 'h-full', 'object-cover');
+                                div.appendChild(img);
+
+                                // Optional: Add a remove button overlay
+                                const removeBtn = document.createElement('button');
+                                removeBtn.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i>';
+                                removeBtn.setAttribute('aria-label', 'Remove image');
+                                removeBtn.classList.add('absolute', 'top-1', 'right-1', 'p-1', 'bg-red-600', 'text-white', 'rounded-full', 'opacity-0', 'group-hover:opacity-100', 'transition-opacity', 'focus:outline-none', 'focus:ring-2', 'focus:ring-red-500');
+                                removeBtn.title = 'Remove image';
+                                removeBtn.type = 'button'; // Prevent form submission
+                                removeBtn.onclick = (event) => {
+                                    event.stopPropagation(); // Prevent triggering click on drop area
+                                    div.remove();
+                                    // TODO: Need more complex logic to remove the file from the input's FileList
+                                    console.warn("Removing preview only. File might still be selected.");
+                                    lucide.createIcons(); // Re-render if icon removed
+                                };
+                                div.appendChild(removeBtn);
+
+                                imagePreviews.appendChild(div);
+                                lucide.createIcons(); // Re-render icon
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            console.log(`File ${file.name} is not an image.`);
+                        }
+                    });
+                 }
+            }
+        }
+
+        // Add form validation or submission logic here if needed
+
+    </script>
+</body>
+</html>

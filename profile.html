@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomhy - Your Profile</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f2f6; 
+            color: #1F2937;
+            padding-bottom: 64px; /* Mobile nav height */
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint */
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+         .light-card:hover { /* Subtle hover for action items */
+             box-shadow: 0 6px 10px -2px rgb(0 0 0 / 0.07), 0 3px 6px -3px rgb(0 0 0 / 0.07);
+        }
+        
+         /* Custom form focus styles */
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+        
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen"> <header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-sm shadow-sm flex-shrink-0">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex h-20 items-center justify-between">
+                <a href="index.html" class="flex-shrink-0">
+                    <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
+                </a>
+                <nav class="hidden items-center space-x-6 lg:flex">
+                    <a href="index.html#why-roomhy" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About Us</a>
+                    <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                    <a href="index.html#register-property" class="ml-4 flex items-center space-x-1 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Post Your Property</span>
+                    </a>
+                </nav>
+                <button id="menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden">
+                    <i data-lucide="menu" class="w-7 h-7 text-gray-800"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-white z-50 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+         <div class="flex justify-between items-center p-4 border-b flex-shrink-0">
+            <h2 class="text-xl font-bold text-blue-600">Menu</h2>
+            <button id="menu-close" class="p-2"><i data-lucide="x" class="w-6 h-6 text-gray-700"></i></button>
+        </div>
+        <div class="p-4 border-b"><p class="text-gray-800 font-medium">Hi, User Name</p></div>
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+             <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="briefcase" class="w-5 h-5"></i><span>My Bookings</span></a>
+            <a href="index.html#register-property" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="building" class="w-5 h-5"></i><span>List Your Property</span></a>
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="life-buoy" class="w-5 h-5"></i><span>24/7 Support</span></a>
+             <a href="index.html#why-roomhy" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="info" class="w-5 h-5"></i><span>About Us</span></a>
+            <a href="index.html#contact" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="mail" class="w-5 h-5"></i><span>Contact Us</span></a>
+        </nav>
+        <div class="p-4 border-t flex-shrink-0">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i><span>Logout</span></a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-12 mt-8 flex-grow"> <div class="max-w-2xl mx-auto space-y-8"> <h1 class="text-3xl md:text-4xl font-bold text-gray-900 text-center">Your Profile</h1>
+
+            <div class="light-card rounded-lg p-6 md:p-8 text-center">
+                 <img src="https://i.pravatar.cc/150?u=a042581f4e29026704b" alt="User Avatar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                 <h2 id="profile-name" class="text-2xl font-bold text-gray-900">Anjali Singh</h2> <p id="profile-email" class="text-gray-500 mt-1">anjali.singh@example.com</p> <p id="profile-phone" class="text-gray-500 mt-1">+91 98765 43210</p> </div>
+
+            <div class="space-y-4">
+                <a href="#edit-profile" class="light-card rounded-lg p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center space-x-3">
+                         <i data-lucide="user-cog" class="w-6 h-6 text-blue-600"></i>
+                         <span class="font-semibold text-gray-800">Edit Profile</span>
+                    </div>
+                     <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+                </a>
+
+                <a href="#change-password" class="light-card rounded-lg p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
+                     <div class="flex items-center space-x-3">
+                         <i data-lucide="lock" class="w-6 h-6 text-blue-600"></i>
+                         <span class="font-semibold text-gray-800">Change Password</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+                </a>
+                
+                 <a href="#notifications" class="light-card rounded-lg p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
+                     <div class="flex items-center space-x-3">
+                         <i data-lucide="bell" class="w-6 h-6 text-blue-600"></i>
+                         <span class="font-semibold text-gray-800">Notification Settings</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+                </a>
+
+                 <a href="#logout" id="logout-button" class="light-card rounded-lg p-4 flex justify-between items-center hover:bg-red-50 transition-colors group">
+                    <div class="flex items-center space-x-3">
+                         <i data-lucide="log-out" class="w-6 h-6 text-red-600"></i>
+                         <span class="font-semibold text-red-700 group-hover:text-red-800">Logout</span>
+                    </div>
+                     <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-red-500"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-gray-300 flex-shrink-0 mt-auto"> <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="md:col-span-1"><a href="index.html" class="mb-4 inline-block"><img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto brightness-0 invert"></a><p class="text-gray-400 text-sm">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p><div class="flex space-x-5 mt-6"><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a></div></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Explore</h4><ul class="space-y-3"><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Apartments</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Hostels</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Co-Living</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">PGs</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Company</h4><ul class="space-y-3"><li><a href="index.html#why-roomhy" class="text-gray-300 hover:text-white transition-colors">About Us</a></li><li><a href="index.html#register-property" class="text-gray-300 hover:text-white transition-colors">List Your Property</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Get in Touch</h4><ul class="space-y-3"><li class="flex items-start space-x-2"><i data-lucide="mail" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="mailto:support@roomhy.com" class="text-gray-300 hover:text-white transition-colors">support@roomhy.com</a></li><li class="flex items-start space-x-2"><i data-lucide="phone" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="tel:+911234567890" class="text-gray-300 hover:text-white transition-colors">+91 12345 67890</a></li><li class="flex items-start space-x-2"><i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><span class="text-gray-300">Bengaluru, India</span></li></ul></div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm"><p>&copy; 2025 Roomhy. All Rights Reserved. Built with ❤️ for students.</p></div>
+        </div>
+    </footer>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-gray-200 z-30 lg:hidden flex-shrink-0">
+        <div class="container mx-auto px-4 h-16 flex justify-around items-center max-w-lg">
+            <a href="index.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="home" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Home</span></a>
+            <a href="stays.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="layout-grid" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Stays</span></a>
+            <a href="chat.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="message-circle" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Chat</span></a>
+            <a href="save.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="heart" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Save</span></a>
+            <a href="profile.html" class="flex flex-col items-center justify-center text-blue-600"> <i data-lucide="user" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Profile</span></a>
+        </div>
+    </nav>
+
+
+    <script>
+        lucide.createIcons();
+
+        /* Mobile Side Menu JS */
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        if (menuToggle && mobileMenu && menuClose && menuOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                menuOverlay.classList.remove('hidden');
+            });
+            const closeMenu = () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuOverlay.classList.add('hidden');
+            };
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', closeMenu); });
+        }
+        
+        /* Placeholder Logout Functionality */
+        const logoutButton = document.getElementById('logout-button');
+        if(logoutButton) {
+            logoutButton.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default link behavior
+                if(confirm('Are you sure you want to logout?')) {
+                    // TODO: Add actual logout logic here (e.g., clear session, redirect)
+                    console.log("Logout action triggered");
+                     alert("You have been logged out."); // Simple feedback
+                     // window.location.href = '/login'; // Example redirect
+                }
+            });
+        }
+        
+        // Add JS for Edit Profile / Change Password Modals or Page Navigation if needed
+
+    </script>
+</body>
+</html>

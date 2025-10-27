@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomhy - Saved Stays</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f2f6; 
+            color: #1F2937;
+            padding-bottom: 64px; /* Mobile nav height */
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04); /* Lighter shadow for list items */
+            transition: box-shadow 0.3s ease;
+        }
+        .light-card:hover {
+             box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+        }
+        
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-sm shadow-sm flex-shrink-0">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex h-20 items-center justify-between">
+                <a href="index.html" class="flex-shrink-0">
+                    <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
+                </a>
+                <nav class="hidden items-center space-x-6 lg:flex">
+                    <a href="index.html#why-roomhy" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About Us</a>
+                    <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                    <a href="index.html#register-property" class="ml-4 flex items-center space-x-1 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Post Your Property</span>
+                    </a>
+                </nav>
+                <button id="menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden">
+                    <i data-lucide="menu" class="w-7 h-7 text-gray-800"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-72 h-full bg-white z-50 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+         <div class="flex justify-between items-center p-4 border-b flex-shrink-0">
+            <h2 class="text-xl font-bold text-blue-600">Menu</h2>
+            <button id="menu-close" class="p-2"><i data-lucide="x" class="w-6 h-6 text-gray-700"></i></button>
+        </div>
+        <div class="p-4 border-b"><p class="text-gray-800 font-medium">Hi, User Name</p></div>
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+             <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="briefcase" class="w-5 h-5"></i><span>My Bookings</span></a>
+            <a href="index.html#register-property" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="building" class="w-5 h-5"></i><span>List Your Property</span></a>
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="life-buoy" class="w-5 h-5"></i><span>24/7 Support</span></a>
+             <a href="index.html#why-roomhy" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="info" class="w-5 h-5"></i><span>About Us</span></a>
+            <a href="index.html#contact" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i data-lucide="mail" class="w-5 h-5"></i><span>Contact Us</span></a>
+        </nav>
+        <div class="p-4 border-t flex-shrink-0">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i><span>Logout</span></a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-12 mt-8"> 
+        
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Your Saved Stays</h1>
+            <p class="text-gray-500 mt-1">Properties you've saved for later.</p>
+        </div>
+
+        <div id="saved-items-list" class="space-y-4 max-w-4xl mx-auto"> <div class="light-card rounded-lg overflow-hidden flex items-center p-4 space-x-4">
+                <a href="#" class="block flex-shrink-0"> <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1916&auto:format&fit=crop" alt="Modern PG" class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-md">
+                </a>
+                <div class="flex-grow min-w-0"> <span class="text-xs text-blue-800 bg-blue-100 px-2 py-0.5 rounded-full font-medium inline-block mb-1">Co-Living</span>
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 truncate hover:text-blue-600 transition-colors leading-tight">
+                         <a href="#">The Scholar's Loft</a>
+                    </h3>
+                    <p class="text-sm text-gray-500 flex items-center mt-1 truncate">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1.5 flex-shrink-0"></i>
+                        Koramangala, BLR
+                    </p>
+                    <p class="text-sm sm:text-base font-bold text-gray-800 mt-1">₹16,500 <span class="text-xs sm:text-sm font-normal text-gray-500">/ mo</span></p>
+                </div>
+                 <button class="delete-saved-item flex-shrink-0 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-full transition-colors">
+                    <span class="sr-only">Remove</span>
+                    <i data-lucide="trash-2" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+             <div class="light-card rounded-lg overflow-hidden flex items-center p-4 space-x-4">
+                <a href="#" class="block flex-shrink-0"> 
+                     <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto:format&fit=crop" alt="Indore Space 2" class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-md">
+                </a>
+                <div class="flex-grow min-w-0"> 
+                     <span class="text-xs text-purple-800 bg-purple-100 px-2 py-0.5 rounded-full font-medium inline-block mb-1">Apartment</span>
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 truncate hover:text-blue-600 transition-colors leading-tight">
+                         <a href="#">The Scholar's Den</a>
+                    </h3>
+                    <p class="text-sm text-gray-500 flex items-center mt-1 truncate">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1.5 flex-shrink-0"></i>
+                        Bhawarkua, Indore
+                    </p>
+                    <p class="text-sm sm:text-base font-bold text-gray-800 mt-1">₹9,500 <span class="text-xs sm:text-sm font-normal text-gray-500">/ mo</span></p>
+                </div>
+                 <button class="delete-saved-item flex-shrink-0 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-full transition-colors">
+                    <span class="sr-only">Remove</span>
+                    <i data-lucide="trash-2" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="light-card rounded-lg overflow-hidden flex items-center p-4 space-x-4">
+                <a href="#" class="block flex-shrink-0"> 
+                     <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto:format&fit=crop" alt="Girls Hostel" class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-md">
+                </a>
+                <div class="flex-grow min-w-0"> 
+                     <span class="text-xs text-pink-800 bg-pink-100 px-2 py-0.5 rounded-full font-medium inline-block mb-1">Girls Hostel</span>
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 truncate hover:text-blue-600 transition-colors leading-tight">
+                         <a href="#">Athena House</a>
+                    </h3>
+                    <p class="text-sm text-gray-500 flex items-center mt-1 truncate">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1.5 flex-shrink-0"></i>
+                        Hinjewadi, Pune
+                    </p>
+                    <p class="text-sm sm:text-base font-bold text-gray-800 mt-1">₹10,000 <span class="text-xs sm:text-sm font-normal text-gray-500">/ mo</span></p>
+                </div>
+                 <button class="delete-saved-item flex-shrink-0 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-full transition-colors">
+                    <span class="sr-only">Remove</span>
+                    <i data-lucide="trash-2" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            </div>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-gray-300 flex-shrink-0 mt-auto"> <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="md:col-span-1"><a href="index.html" class="mb-4 inline-block"><img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto brightness-0 invert"></a><p class="text-gray-400 text-sm">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p><div class="flex space-x-5 mt-6"><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a><a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a></div></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Explore</h4><ul class="space-y-3"><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Apartments</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Hostels</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">Co-Living</a></li><li><a href="stays.html" class="text-gray-300 hover:text-white transition-colors">PGs</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Company</h4><ul class="space-y-3"><li><a href="index.html#why-roomhy" class="text-gray-300 hover:text-white transition-colors">About Us</a></li><li><a href="index.html#register-property" class="text-gray-300 hover:text-white transition-colors">List Your Property</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-5 text-white">Get in Touch</h4><ul class="space-y-3"><li class="flex items-start space-x-2"><i data-lucide="mail" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="mailto:support@roomhy.com" class="text-gray-300 hover:text-white transition-colors">support@roomhy.com</a></li><li class="flex items-start space-x-2"><i data-lucide="phone" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><a href="tel:+911234567890" class="text-gray-300 hover:text-white transition-colors">+91 12345 67890</a></li><li class="flex items-start space-x-2"><i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i><span class="text-gray-300">Bengaluru, India</span></li></ul></div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm"><p>&copy; 2025 Roomhy. All Rights Reserved. Built with ❤️ for students.</p></div>
+        </div>
+    </footer>
+
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-gray-200 z-30 lg:hidden flex-shrink-0">
+        <div class="container mx-auto px-4 h-16 flex justify-around items-center max-w-lg">
+            <a href="index.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="home" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Home</span></a>
+            <a href="stays.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="layout-grid" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Stays</span></a>
+            <a href="chat.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="message-circle" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Chat</span></a>
+            <a href="save.html" class="flex flex-col items-center justify-center text-blue-600"> <i data-lucide="heart" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Save</span></a>
+            <a href="#profile" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600"><i data-lucide="user" class="w-6 h-6"></i><span class="text-xs font-medium mt-0.5">Profile</span></a>
+        </div>
+    </nav>
+
+
+    <script>
+        lucide.createIcons();
+
+        /* Mobile Side Menu JS */
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        if (menuToggle && mobileMenu && menuClose && menuOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                menuOverlay.classList.remove('hidden');
+            });
+            const closeMenu = () => {
+                mobileMenu.classList.add('translate-x-full');
+                menuOverlay.classList.add('hidden');
+            };
+            menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', closeMenu); });
+        }
+        
+        /* Delete Saved Items JS (Placeholder) */
+        const savedItemsList = document.getElementById('saved-items-list'); // Changed ID selector
+        if (savedItemsList) {
+            savedItemsList.addEventListener('click', function(event) {
+                const deleteButton = event.target.closest('.delete-saved-item');
+                
+                if (deleteButton) {
+                    event.preventDefault(); 
+                    
+                    // Find the parent list item (the div containing the row)
+                    const itemToRemove = deleteButton.closest('.light-card'); 
+                    
+                    if (itemToRemove) {
+                        if (confirm('Are you sure you want to remove this saved stay?')) {
+                            // TODO: Add backend/local storage removal logic here
+                            itemToRemove.remove();
+                            
+                            // Optional: Check if list is empty
+                            if (savedItemsList.children.length === 0) {
+                                console.log("No saved items left."); 
+                                // Example: savedItemsList.innerHTML = `<div class="text-center ...">Empty state HTML</div>`;
+                                // lucide.createIcons(); // If adding icons in empty state
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
