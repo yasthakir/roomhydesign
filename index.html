@@ -15,7 +15,7 @@
             background-color: #f1f2f6; /* Changed to light grey like Flipkart */
             color: #1F2937;
             /* Added padding-bottom to prevent sticky footer from covering content */
-            padding-bottom: 96px; /* 6rem, which is h-20 (5rem) + some space */
+            padding-bottom: 64px; /* 4rem, which is h-16 */
         }
 
         /* Hide padding on desktop where sticky footer is hidden */
@@ -37,7 +37,7 @@
         
         .animate-gradient-flow {
             background-size: 200% auto;
-            background-image: linear-gradient(to right, #06b6d4 0%, #3b82f6 50%, #06b6d4 100%);
+            background-image: linear-gradient(to right, #2596be 0%, #01122f 50%, #06b6d4 100%);
             animation: gradient-flow 10s ease infinite;
         }
 
@@ -114,36 +114,44 @@
 </head>
 <body class="text-gray-800">
 
-    <header class="text-white shadow-lg py-4 animate-gradient-flow container mx-auto px-4 sm:px-6 rounded-2xl mt-4">
-        <div class="flex flex-col space-y-4">
-            
-            <div class="flex justify-between items-center space-x-4">
+    <header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex h-20 items-center justify-between">
+                
                 <a href="#" class="flex-shrink-0">
-                    <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
+                    <img src="images/roomhy.png" alt="Roomhy Logo" class="h-12 w-120">
                 </a>
                 
-                <div class="flex items-center space-x-2">
-                    <a href="#register-property" class=" sm:flex items-center space-x-1 bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors">
-                        <i data-lucide="plus-circle" class=" hidden w-4 h-4"></i>
-                        <span>Post Property</span>
+                <nav class="hidden items-center space-x-6 lg:flex">
+                    <a href="#why-roomhy" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">About Us</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                    <a href="#register-property" class="ml-4 flex items-center space-x-1 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Post Your Property</span>
                     </a>
-                    
-                    <button id="menu-toggle" class="p-2 rounded-lg hover:bg-white/20 transition-colors">
-                        <i data-lucide="menu" class="w-8 h-8"></i>
-                    </button>
-                </div>
+                </nav>
+                
+                <button id="menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors lg:hidden">
+                    <i data-lucide="menu" class="w-7 h-7 text-gray-800"></i>
+                </button>
+
             </div>
+        </div>
+    </header>
 
-            <p class="text-white text-lg font-medium text-shadow">Find your second home here</p>
-
-            <div class="relative w-full">
-                <input type="text" placeholder="Search for 'PG near me'" class="w-full p-3 pl-4 pr-12 rounded-lg bg-white text-gray-900 border-transparent focus:ring-2 focus:ring-cyan-300 focus:outline-none placeholder-gray-500">
-                <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-blue-600 hover:bg-blue-700 rounded-lg">
+    <section class="py-12 md:py-16 text-white animate-gradient-flow">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-shadow mb-6">
+                Find your second home here
+            </h1>
+            <div class="relative w-full max-w-2xl mx-auto">
+                <input type="text" placeholder="Search for 'PG near me' or 'Hostel in Kota'" class="w-full p-4 pl-5 pr-14 rounded-lg bg-white text-gray-900 border-transparent focus:ring-4 focus:ring-cyan-300/50 focus:outline-none placeholder-gray-500 shadow-lg">
+                <button type="submit" class="absolute right-2.5 top-1/2 -translate-y-1/2 p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
                     <i data-lucide="search" class="w-5 h-5 text-white"></i>
                 </button>
             </div>
-            </div>
-    </header>
+        </div>
+    </section>
 
     <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
     
@@ -190,57 +198,59 @@
     </div>
 
 
-    <section id="top-cities-categories" class="container mx-auto px-4 sm:px-6 mt-4 bg-white py-4 shadow-sm rounded-2xl">
-        <h2 class="sr-only">Top Cities</h2>
-        <div id="cities-category-slider" class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth horizontal-slider">
-            
-            <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
-                <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center overflow-hidden border border-gray-200">
-                       <img src="https://placehold.co/80x80/E9D5FF/8B5CF6?text=Kota" alt="Kota Icon" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-sm font-medium text-gray-800 leading-tight">Kota</h3>
-            </a>
+    <section id="top-cities-categories" class="container mx-auto px-4 sm:px-6 -mt-8 relative z-10">
+        <div class="bg-white py-4 shadow-lg rounded-2xl">
+            <h2 class="sr-only">Top Cities</h2>
+            <div id="cities-category-slider" class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth horizontal-slider px-4">
+                
+                <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/80x80/E9D5FF/8B5CF6?text=Kota" alt="Kota Icon" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 leading-tight">Kota</h3>
+                </a>
 
-            <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
-                <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center overflow-hidden border border-gray-200">
-                    <img src="https://placehold.co/80x80/C7D2FE/4F46E5?text=GGM" alt="Gurugram Icon" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-sm font-medium text-gray-800 leading-tight">Gurugram</h3>
-            </a>
-            
-            <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
-                <div class="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center overflow-hidden border border-gray-200">
-                    <img src="https://placehold.co/80x80/BAE6FD/0284C7?text=MBI" alt="Mumbai Icon" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-sm font-medium text-gray-800 leading-tight">Mumbai</h3>
-            </a>
+                <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/80x80/C7D2FE/4F46E5?text=GGM" alt="Gurugram Icon" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 leading-tight">Gurugram</h3>
+                </a>
+                
+                <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/80x80/BAE6FD/0284C7?text=MBI" alt="Mumbai Icon" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 leading-tight">Mumbai</h3>
+                </a>
 
-            <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
-                <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center overflow-hidden border border-gray-200">
-                    <img src="https://placehold.co/80x80/FBCFE8/BE185D?text=BLR" alt="Bangalore Icon" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-sm font-medium text-gray-800 leading-tight">Bangalore</h3>
-            </a>
+                <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/80x80/FBCFE8/BE185D?text=BLR" alt="Bangalore Icon" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 leading-tight">Bangalore</h3>
+                </a>
 
-            <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
-                <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center overflow-hidden border border-gray-200">
-                       <img src="https://placehold.co/80x80/D1FAE5/059669?text=DEL" alt="Delhi Icon" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-sm font-medium text-gray-800 leading-tight">Delhi</h3>
-            </a>
-            
-            <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
-                <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center border border-gray-200">
-                    <i data-lucide="arrow-right" class="w-6 h-6 text-gray-700"></i>
-                </div>
-                <h3 class="text-sm font-medium text-gray-800 leading-tight">View All</h3>
-            </a>
+                <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center overflow-hidden border border-gray-200">
+                        <img src="https://placehold.co/80x80/D1FAE5/059669?text=DEL" alt="Delhi Icon" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 leading-tight">Delhi</h3>
+                </a>
+                
+                <a href="#" class="flex flex-col items-center justify-start text-center flex-shrink-0 w-20 snap-start space-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center border border-gray-200">
+                        <i data-lucide="arrow-right" class="w-6 h-6 text-gray-700"></i>
+                    </div>
+                    <h3 class="text-sm font-medium text-gray-800 leading-tight">View All</h3>
+                </a>
 
+            </div>
         </div>
     </section>
 
 
-    <section id="home" class="container mx-auto px-4 sm:px-6 mt-4"> <div class="relative rounded-2xl shadow-xl overflow-hidden h-56 md:h-64 group">
+    <section id="home" class="container mx-auto px-4 sm:px-6 mt-6"> <div class="relative rounded-2xl shadow-xl overflow-hidden h-56 md:h-64 group">
             <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2071&auto=format&fit=crop" 
                  alt="Student accommodation promotion" 
                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -575,45 +585,88 @@
 
     </main>
 
-    <footer class="bg-white border-t border-gray-200">
-        <div class="container mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
+    <footer class="bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+                <div class="md:col-span-1">
                     <a href="#" class="mb-4 inline-block">
-                        <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto">
-                    </a>
-                    <p class="text-gray-500">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p>
+                        <img src="logo.svg" alt="Roomhy Logo" class="h-10 w-auto brightness-0 invert"> 
+                        </a>
+                    <p class="text-gray-400 text-sm">Your trusted partner in finding the perfect student accommodation. Live, learn, and grow with us.</p>
+                    <div class="flex space-x-5 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    </div>
                 </div>
-                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Explore</h4><ul class="space-y-2"><li><a href="#" class="text-gray-500 hover:text-gray-800">Apartments</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Hostels</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Co-Living</a></li></ul></div>
-                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Company</h4><ul class="space-y-2"><li><a href="#why-roomhy" class="text-gray-500 hover:text-gray-800">About Us</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Privacy Policy</a></li><li><a href="#" class="text-gray-500 hover:text-gray-800">Terms of Service</a></li></ul></div>
-                <div><h4 class="font-semibold text-lg mb-4 text-gray-900">Connect</h4><div class="flex space-x-4"><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="facebook" class="w-6 h-6"></i></a><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="instagram" class="w-6 h-6"></i></a><a href="#" class="text-gray-500 hover:text-gray-800"><i data-lucide="twitter" class="w-6 h-6"></i></a></div></div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-5 text-white">Explore</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Apartments</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Hostels</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Co-Living</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">PGs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-5 text-white">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#why-roomhy" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#register-property" class="text-gray-300 hover:text-white transition-colors">List Your Property</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-5 text-white">Get in Touch</h4>
+                    <ul class="space-y-3">
+                         <li class="flex items-start space-x-2">
+                            <i data-lucide="mail" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i>
+                            <a href="mailto:support@roomhy.com" class="text-gray-300 hover:text-white transition-colors">support@roomhy.com</a>
+                         </li>
+                         <li class="flex items-start space-x-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i>
+                            <a href="tel:+911234567890" class="text-gray-300 hover:text-white transition-colors">+91 12345 67890</a>
+                         </li>
+                         <li class="flex items-start space-x-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0"></i>
+                            <span class="text-gray-300">Bengaluru, India</span>
+                         </li>
+                    </ul>
+                </div>
             </div>
-            <div class="mt-12 border-t border-gray-200 pt-6 text-center text-gray-500"><p>&copy; 2025 Roomhy. All Rights Reserved.</p></div>
+            
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Roomhy. All Rights Reserved. Built with ❤️ for students.</p>
+            </div>
         </div>
     </footer>
 
 
-    <nav class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-lg z-30 lg:hidden">
-        <div class="container mx-auto px-4 h-20 flex justify-around items-center max-w-lg">
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-gray-200 z-30 lg:hidden">
+        <div class="container mx-auto px-4 h-16 flex justify-around items-center max-w-lg">
             <a href="#home" class="flex flex-col items-center justify-center text-blue-600">
                 <i data-lucide="home" class="w-6 h-6"></i>
-                <span class="text-xs font-medium">Home</span>
+                <span class="text-xs font-medium mt-0.5">Home</span>
             </a>
             <a href="stays.html" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
                 <i data-lucide="layout-grid" class="w-6 h-6"></i>
-                <span class="text-xs font-medium">Stays</span>
+                <span class="text-xs font-medium mt-0.5">Stays</span>
             </a>
             <a href="#chat" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
                 <i data-lucide="message-circle" class="w-6 h-6"></i>
-                <span class="text-xs font-medium">Chat</span>
+                <span class="text-xs font-medium mt-0.5">Chat</span>
             </a>
             <a href="#save" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
                 <i data-lucide="heart" class="w-6 h-6"></i>
-                <span class="text-xs font-medium">Save</span>
+                <span class="text-xs font-medium mt-0.5">Save</span>
             </a>
             <a href="#profile" class="flex flex-col items-center justify-center text-gray-600 hover:text-blue-600">
                 <i data-lucide="user" class="w-6 h-6"></i>
-                <span class="text-xs font-medium">Profile</span>
+                <span class="text-xs font-medium mt-0.5">Profile</span>
             </a>
         </div>
     </nav>
@@ -663,8 +716,11 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('section > div:not(.relative):not(#hero-content-wrapper), section > h2').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
+            // Check if the element has already been animated
+            if (!el.classList.contains('animate-slide-in')) {
+                 el.style.opacity = '0';
+                 observer.observe(el);
+            }
         });
 
 
